@@ -82,8 +82,12 @@ function App() {
             <Route path="/payment-success" element={<PaymentSuccessPage />} />
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/orders" element={user ? <OrdersPage /> : <Navigate to="/auth" />} />
+            <Route path="/category/:categoryName" element={<CategoryPage />} />
+            <Route path="/daily-offers" element={<DailyOffersPage />} />
+            <Route path="/social" element={<SocialPage />} />
             <Route path="/admin" element={user?.role === "admin" ? <AdminDashboard /> : <Navigate to="/" />} />
             <Route path="/admin/settings" element={user?.role === "admin" ? <StoreSettingsPage /> : <Navigate to="/" />} />
+            <Route path="/admin/customers" element={user?.role === "admin" ? <CustomersPage /> : <Navigate to="/" />} />
           </Routes>
         </BrowserRouter>
         <Toaster position="top-center" richColors />
