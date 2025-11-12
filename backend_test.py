@@ -174,43 +174,28 @@ class BackendTester:
         # Test POST /api/newsletter/subscribe (no auth required)
         test_email = f"newsletter_{uuid.uuid4()}@example.com"
         
-        # Try as form data first (FastAPI EmailStr parameter)
-        import aiohttp
-        form_data = aiohttp.FormData()
-        form_data.add_field('email', test_email)
-        
-        try:
-            async with self.session.post(f"{self.base_url}/newsletter/subscribe", data=form_data) as response:
-                response_data = await response.json()
-                success = response.status < 400
-                status = response.status
-        except Exception as e:
-            success, response_data, status = False, {"error": str(e)}, 0
-        
-        if success and "message" in response_data:
-            self.log_result("Newsletter Subscribe", True, f"Subscription successful: {response_data.get('message')}")
-        else:
-            # Try as JSON body if form data failed
-            newsletter_data = {"email": test_email}
-            success, response_data, status = await self.make_request("POST", "/newsletter/subscribe", newsletter_data)
-            if success and "message" in response_data:
-                self.log_result("Newsletter Subscribe", True, f"Subscription successful: {response_data.get('message')}")
-            else:
-                self.log_result("Newsletter Subscribe", False, f"Status: {status}", response_data)
-        
-        # Test duplicate subscription with same method that worked
-        if success:
-            try:
-                async with self.session.post(f"{self.base_url}/newsletter/subscribe", data=form_data) as response:
-                    response_data = await response.json()
-                    success = response.status < 400
-            except:
-                success, response_data, status = await self.make_request("POST", "/newsletter/subscribe", newsletter_data)
+        # FastAPI EmailStr parameter should be query parameter
+        success, response, status = await self.make_request(
+            "POST", 
+            "/newsletter/subscribe", 
+            params={"email": test_email}
+        )
+        if success and "message" in response:
+            self.log_result("Newsletter Subscribe", True, f"Subscription successful: {response.get('message')}")
             
-            if success and "already subscribed" in response_data.get("message", "").lower():
+            # Test duplicate subscription
+            success, response, status = await self.make_request(
+                "POST", 
+                "/newsletter/subscribe", 
+                params={"email": test_email}
+            )
+            if success and "already subscribed" in response.get("message", "").lower():
                 self.log_result("Newsletter Duplicate Subscribe", True, "Correctly handled duplicate subscription")
             else:
-                self.log_result("Newsletter Duplicate Subscribe", False, f"Response: {response_data}")
+                self.log_result("Newsletter Duplicate Subscribe", False, f"Status: {status}", response)
+        else:
+            self.log_result("Newsletter Subscribe", False, f"Status: {status}", response)
+            self.log_result("Newsletter Duplicate Subscribe", False, "Skipped due to first test failure")
     
     async def test_products_endpoints(self):
         """Test products endpoints"""
