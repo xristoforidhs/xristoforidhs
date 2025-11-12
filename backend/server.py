@@ -292,7 +292,7 @@ class StoreSettingsUpdate(BaseModel):
     medianet_enabled: Optional[bool] = None
 
 class NewsletterSubscriber(BaseModel):
-    model_config = ConfigDict(extra=\"ignore\")
+    model_config = ConfigDict(extra="ignore")
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     email: EmailStr
     subscribed: bool = True
