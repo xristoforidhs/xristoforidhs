@@ -41,14 +41,7 @@ export default function DailyOffersPage() {
 
   return (
     <div>
-      <nav className="navbar">
-        <div className="navbar-container">
-          <Link to="/" className="navbar-brand">
-            <Package size={28} />
-            Alexouko's Store
-          </Link>
-        </div>
-      </nav>
+      <Navbar />
 
       <div style={{background: 'linear-gradient(135deg, #f59e0b 0%, #ef4444 100%)', color: 'white', padding: '3rem 2rem', textAlign: 'center'}}>
         <Zap size={48} style={{margin: '0 auto', marginBottom: '1rem'}} />
