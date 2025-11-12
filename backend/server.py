@@ -771,6 +771,33 @@ async def toggle_coupon(coupon_id: str, current_user: User = Depends(get_current
 
 # ===== STORE SETTINGS ROUTES =====
 
+@api_router.get("/settings/public")
+async def get_public_settings():
+    """Get public store settings (no auth required) - for social links and ads"""
+    settings = await db.store_settings.find_one({"id": "store_settings"}, {"_id": 0})
+    if not settings:
+        return {
+            "tiktok_url": "",
+            "instagram_url": "",
+            "facebook_url": "",
+            "twitter_url": "",
+            "google_adsense_id": "",
+            "google_adsense_enabled": False,
+            "medianet_id": "",
+            "medianet_enabled": False
+        }
+    
+    return {
+        "tiktok_url": settings.get("tiktok_url", ""),
+        "instagram_url": settings.get("instagram_url", ""),
+        "facebook_url": settings.get("facebook_url", ""),
+        "twitter_url": settings.get("twitter_url", ""),
+        "google_adsense_id": settings.get("google_adsense_id", ""),
+        "google_adsense_enabled": settings.get("google_adsense_enabled", False),
+        "medianet_id": settings.get("medianet_id", ""),
+        "medianet_enabled": settings.get("medianet_enabled", False)
+    }
+
 @api_router.get("/settings", response_model=StoreSettings)
 async def get_store_settings(current_user: User = Depends(get_current_admin)):
     """Get store settings (admin only)"""
