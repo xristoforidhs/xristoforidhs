@@ -56,34 +56,7 @@ export default function CategoryPage() {
 
   return (
     <div>
-      <nav className="navbar">
-        <div className="navbar-container">
-          <Link to="/" className="navbar-brand">
-            <Package size={28} />
-            Alexouko's Store
-          </Link>
-          <div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
-            <div style={{position: 'relative'}}>
-              <input
-                type="text"
-                placeholder="Search products..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                style={{
-                  padding: '0.5rem 2.5rem 0.5rem 1rem',
-                  borderRadius: '8px',
-                  border: '2px solid #e2e8f0',
-                  width: '300px'
-                }}
-              />
-              <button onClick={handleSearch} style={{position: 'absolute', right: '0.5rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer'}}>
-                <Search size={20} />
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       <div style={{maxWidth: '1400px', margin: '3rem auto', padding: '2rem'}}>
         <h1 className="section-title">{categoryName}</h1>
