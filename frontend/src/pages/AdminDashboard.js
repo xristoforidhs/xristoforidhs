@@ -263,23 +263,37 @@ export default function AdminDashboard() {
                   <p className="product-description">{product.description.substring(0, 60)}...</p>
                   <div className="product-price">${product.price}</div>
                   <p style={{fontSize: '0.875rem', color: '#64748b', marginBottom: '1rem'}}>Απόθεμα: {product.stock}</p>
-                  <div style={{display: 'flex', gap: '0.5rem'}}>
+                  <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
                     <button 
-                      onClick={() => handleOpenDialog(product)}
-                      className="btn btn-secondary"
-                      style={{flex: 1}}
-                      data-testid={`edit-product-${product.id}`}
+                      onClick={() => toggleDailyOffer(product.id, !product.daily_offer)}
+                      className="btn"
+                      style={{
+                        flex: 1,
+                        background: product.daily_offer ? '#f59e0b' : '#e2e8f0',
+                        color: product.daily_offer ? 'white' : '#475569',
+                        fontSize: '0.75rem'
+                      }}
                     >
-                      <Edit size={16} />
+                      {product.daily_offer ? '⚡ Daily Offer' : 'Set Daily Offer'}
                     </button>
-                    <button 
-                      onClick={() => handleDelete(product.id)}
-                      className="btn btn-danger"
-                      style={{flex: 1}}
-                      data-testid={`delete-product-${product.id}`}
-                    >
-                      <Trash2 size={16} />
-                    </button>
+                    <div style={{display: 'flex', gap: '0.5rem'}}>
+                      <button 
+                        onClick={() => handleOpenDialog(product)}
+                        className="btn btn-secondary"
+                        style={{flex: 1}}
+                        data-testid={`edit-product-${product.id}`}
+                      >
+                        <Edit size={16} />
+                      </button>
+                      <button 
+                        onClick={() => handleDelete(product.id)}
+                        className="btn btn-danger"
+                        style={{flex: 1}}
+                        data-testid={`delete-product-${product.id}`}
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
