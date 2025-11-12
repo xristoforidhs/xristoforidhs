@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { API } from "@/App";
-import { Package } from "lucide-react";
+import Navbar from "@/components/Navbar";
 
 export default function SocialPage() {
   const [settings, setSettings] = useState(null);
@@ -22,14 +21,7 @@ export default function SocialPage() {
 
   return (
     <div>
-      <nav className="navbar">
-        <div className="navbar-container">
-          <Link to="/" className="navbar-brand">
-            <Package size={28} />
-            Alexouko's Store
-          </Link>
-        </div>
-      </nav>
+      <Navbar />
 
       <div style={{maxWidth: '800px', margin: '4rem auto', padding: '2rem', textAlign: 'center'}}>
         <h1 style={{fontSize: '3rem', fontWeight: 700, marginBottom: '1rem'}}>Follow Us</h1>
