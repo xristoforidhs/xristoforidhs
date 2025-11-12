@@ -117,51 +117,63 @@ user_problem_statement: |
 backend:
   - task: "Theme API endpoints (/theme GET and PUT)"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Theme API endpoints already existed in backend. GET /api/theme returns theme settings, PUT /api/theme updates theme settings (admin only)."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: GET /api/theme works without auth, returns theme settings with primary color. PUT /api/theme correctly requires admin auth and updates theme successfully. Both endpoints working perfectly."
 
   - task: "Reviews API endpoints"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Review endpoints already existed: GET /api/products/{product_id}/reviews and POST /api/reviews to create reviews."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: GET /api/products/{product_id}/reviews returns product reviews successfully. POST /api/reviews creates new reviews with proper authentication. Review system working correctly."
 
   - task: "Newsletter subscription endpoint"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Newsletter endpoint already existed: POST /api/newsletter/subscribe accepts email and stores in newsletter_subscribers collection."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: POST /api/newsletter/subscribe works without auth, accepts email as query parameter, successfully subscribes users and handles duplicate subscriptions correctly."
 
   - task: "Profit markup calculation system"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Added profit markup system with helper function apply_profit_markup() and two new endpoints: PUT /api/products/{product_id}/calculate-price and POST /api/products/bulk-calculate-prices. Default 100% markup = 50% profit."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: PUT /api/products/{product_id}/calculate-price correctly requires admin auth and calculates prices (Cost $10 -> Selling $22 with 120% markup). POST /api/products/bulk-calculate-prices successfully updated 101 products. Profit markup system working perfectly."
 
 frontend:
   - task: "Theme Customizer page"
