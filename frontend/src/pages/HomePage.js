@@ -45,43 +45,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <nav className="navbar">
-        <div className="navbar-container">
-          <Link to="/" className="navbar-brand" data-testid="navbar-brand">
-            <Package size={28} />
-            Alexouko's Store
-          </Link>
-          <div className="navbar-links">
-            <Link to="/" className="navbar-link">Home</Link>
-            <CategoryDropdown />
-            <Link to="/daily-offers" className="navbar-link" style={{color: '#f59e0b', fontWeight: 600}}>Daily Offers</Link>
-            <Link to="/social" className="navbar-link">Socials</Link>
-            <Link to="/cart" className="navbar-link" data-testid="cart-link">
-              <ShoppingCart size={20} />
-              Cart {cartCount > 0 && <span className="cart-badge" data-testid="cart-count">{cartCount}</span>}
-            </Link>
-            {user ? (
-              <>
-                {user.role === "admin" && (
-                  <Link to="/admin" className="navbar-link" data-testid="admin-link">
-                    Admin
-                  </Link>
-                )}
-                <Link to="/orders" className="navbar-link" data-testid="orders-link">
-                  Orders
-                </Link>
-                <button onClick={logout} className="navbar-link" style={{background: 'none', border: 'none', cursor: 'pointer'}} data-testid="logout-btn">
-                  <LogOut size={20} /> Logout
-                </button>
-              </>
-            ) : (
-              <Link to="/auth" className="navbar-link" data-testid="login-link">
-                <User size={20} /> Login
-              </Link>
-            )}
-          </div>
-        </div>
-      </nav>
+      <Navbar cartCount={cartCount} />
 
       <div className="hero-section" data-testid="hero-section">
         <h1 className="hero-title">Alexouko's Store</h1>
