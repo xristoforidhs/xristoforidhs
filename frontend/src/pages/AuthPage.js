@@ -143,7 +143,7 @@ export default function AuthPage() {
             </div>
 
             <div style={{marginBottom: '2rem'}}>
-              <label style={{display: 'block', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.875rem'}}>Κωδικός</label>
+              <label style={{display: 'block', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.875rem'}}>Password</label>
               <input
                 type="password"
                 value={password}
