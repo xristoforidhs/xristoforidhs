@@ -468,6 +468,30 @@ async def create_checkout_session(checkout_req: CheckoutRequest, background_task
     if order['user_id'] != current_user.id:
         raise HTTPException(status_code=403, detail="Not authorized")
     
+    # Apply coupon if provided
+    final_amount = float(order['total_amount'])
+    discount_amount = 0
+    
+    if checkout_req.coupon_code:
+        try:
+            coupon = await db.coupons.find_one({"code": checkout_req.coupon_code.upper(), "active": True}, {"_id": 0})
+            if coupon:
+                # Calculate discount
+                if coupon['discount_type'] == 'percentage':
+                    discount_amount = final_amount * (coupon['discount_value'] / 100)
+                else:
+                    discount_amount = coupon['discount_value']
+                
+                final_amount = max(0, final_amount - discount_amount)
+                
+                # Increment coupon usage
+                await db.coupons.update_one(
+                    {"code": checkout_req.coupon_code.upper()},
+                    {"$inc": {"used_count": 1}}
+                )
+        except:
+            pass  # Invalid coupon, proceed without discount
+    
     # Initialize Stripe
     host_url = checkout_req.host_url
     webhook_url = f"{host_url}/api/webhook/stripe"
@@ -478,14 +502,15 @@ async def create_checkout_session(checkout_req: CheckoutRequest, background_task
     cancel_url = f"{host_url}/cart"
     
     session_request = CheckoutSessionRequest(
-        amount=float(order['total_amount']),
+        amount=final_amount,
         currency="usd",
         success_url=success_url,
         cancel_url=cancel_url,
         metadata={
             "order_id": order['id'],
             "user_id": current_user.id,
-            "user_email": current_user.email
+            "user_email": current_user.email,
+            "discount_applied": str(discount_amount)
         }
     )
     
