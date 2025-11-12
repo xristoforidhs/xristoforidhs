@@ -411,10 +411,28 @@ async def login(user_input: UserLogin):
 async def get_me(current_user: User = Depends(get_current_user)):
     return UserResponse(id=current_user.id, email=current_user.email, name=current_user.name, role=current_user.role)
 
+# ===== CATEGORIES ROUTES =====
+
+@api_router.get("/categories")
+async def get_categories():
+    """Get all unique categories with product counts"""
+    pipeline = [
+        {"$group": {"_id": "$category", "count": {"$sum": 1}}},
+        {"$sort": {"_id": 1}}
+    ]
+    categories = await db.products.aggregate(pipeline).to_list(1000)
+    return [{"name": cat["_id"], "count": cat["count"]} for cat in categories]
+
 # ===== PRODUCT ROUTES =====
 
 @api_router.get("/products", response_model=List[Product])
-async def get_products():
+async def get_products(
+    category: Optional[str] = None,
+    search: Optional[str] = None,
+    daily_offer: Optional[bool] = None,
+    featured: Optional[bool] = None,
+    limit: int = 100
+):
     products = await db.products.find({}, {"_id": 0}).to_list(1000)
     for product in products:
         if isinstance(product.get('created_at'), str):
