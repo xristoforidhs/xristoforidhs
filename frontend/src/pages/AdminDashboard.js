@@ -141,10 +141,19 @@ export default function AdminDashboard() {
           <ArrowLeft size={20} /> Επιστροφή στο Κατάστημα
         </Link>
 
+        {/* Admin Actions */}
+        <div style={{display: 'flex', gap: '1rem', marginBottom: '2rem'}}>
+          <Link to="/admin/settings" data-testid="settings-link">
+            <Button variant="outline">
+              ⚙️ Store Settings
+            </Button>
+          </Link>
+        </div>
+
         {/* Products Section */}
         <div style={{marginBottom: '4rem'}}>
           <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem'}}>
-            <h1 className="section-title" style={{marginBottom: 0}}>Διαχείριση Προϊόντων</h1>
+            <h1 className="section-title" style={{marginBottom: 0}}>Product Management</h1>
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
                 <Button onClick={() => handleOpenDialog()} data-testid="add-product-btn">
