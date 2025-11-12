@@ -48,10 +48,10 @@ export default function AuthPage() {
       <div style={{minHeight: 'calc(100vh - 80px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem'}}>
         <div style={{width: '100%', maxWidth: '400px', background: 'white', borderRadius: '16px', padding: '3rem', boxShadow: '0 8px 24px rgba(0,0,0,0.12)'}}>
           <h1 style={{fontSize: '2rem', fontWeight: 700, marginBottom: '0.5rem', textAlign: 'center'}} data-testid="auth-title">
-            {isLogin ? 'Σύνδεση' : 'Εγγραφή'}
+            {isLogin ? 'Login' : 'Sign Up'}
           </h1>
           <p style={{color: '#64748b', textAlign: 'center', marginBottom: '2rem'}}>
-            {isLogin ? 'Καλωσήρθατε πίσω!' : 'Δημιουργήστε λογαριασμό'}
+            {isLogin ? 'Welcome back!' : 'Create your account'}
           </p>
 
           {!isLogin && (
