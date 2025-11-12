@@ -433,7 +433,22 @@ async def get_products(
     featured: Optional[bool] = None,
     limit: int = 100
 ):
-    products = await db.products.find({}, {"_id": 0}).to_list(1000)
+    """Get products with filtering"""
+    query = {}
+    
+    if category:
+        query["category"] = category
+    if search:
+        query["$or"] = [
+            {"name": {"$regex": search, "$options": "i"}},
+            {"description": {"$regex": search, "$options": "i"}}
+        ]
+    if daily_offer is not None:
+        query["daily_offer"] = daily_offer
+    if featured is not None:
+        query["featured"] = featured
+    
+    products = await db.products.find(query, {"_id": 0}).limit(limit).to_list(limit)
     for product in products:
         if isinstance(product.get('created_at'), str):
             product['created_at'] = datetime.fromisoformat(product['created_at'])
