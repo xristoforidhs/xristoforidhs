@@ -4,6 +4,7 @@ import axios from "axios";
 import { API, AuthContext } from "@/App";
 import { ShoppingCart, User, LogOut, Package } from "lucide-react";
 import { toast } from "sonner";
+import CategoryDropdown from "@/components/CategoryDropdown";
 
 export default function HomePage() {
   const [products, setProducts] = useState([]);
