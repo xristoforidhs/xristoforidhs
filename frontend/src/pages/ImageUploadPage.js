@@ -15,7 +15,6 @@ export default function ImageUploadPage() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
   const [uploading, setUploading] = useState(false);
-  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     fetchProducts();
