@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { API } from "@/App";
-import { Package, Star } from "lucide-react";
+import { Star } from "lucide-react";
+import Navbar from "@/components/Navbar";
 
 export default function ReviewsPage() {
   const [products, setProducts] = useState([]);
@@ -23,14 +24,7 @@ export default function ReviewsPage() {
 
   return (
     <div>
-      <nav className="navbar">
-        <div className="navbar-container">
-          <Link to="/" className="navbar-brand">
-            <Package size={28} />
-            Alexouko's Store
-          </Link>
-        </div>
-      </nav>
+      <Navbar />
 
       <div style={{maxWidth: '1400px', margin: '3rem auto', padding: '2rem'}}>
         <div style={{textAlign: 'center', marginBottom: '3rem'}}>
