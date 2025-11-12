@@ -10,6 +10,7 @@ import PaymentSuccessPage from "@/pages/PaymentSuccessPage";
 import AdminDashboard from "@/pages/AdminDashboard";
 import OrdersPage from "@/pages/OrdersPage";
 import AuthPage from "@/pages/AuthPage";
+import StoreSettingsPage from "@/pages/StoreSettingsPage";
 import { Toaster } from "@/components/ui/sonner";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
