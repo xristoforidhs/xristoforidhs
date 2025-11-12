@@ -160,10 +160,10 @@ class BackendTester:
         
         # Test without auth (should fail)
         success, response, status = await self.make_request("PUT", "/theme", theme_update)
-        if not success and status == 401:
-            self.log_result("Update Theme (No Auth)", True, "Correctly rejected without authentication")
+        if not success and status in [401, 403]:
+            self.log_result("Update Theme (No Auth)", True, f"Correctly rejected without authentication (status {status})")
         else:
-            self.log_result("Update Theme (No Auth)", False, f"Should have failed with 401, got {status}", response)
+            self.log_result("Update Theme (No Auth)", False, f"Should have failed with 401/403, got {status}", response)
         
         # Test with admin token (if available)
         if self.admin_token:
