@@ -950,6 +950,17 @@ async def toggle_daily_offer(product_id: str, enabled: bool, current_user: User 
     await db.products.update_one({"id": product_id}, {"$set": {"daily_offer": enabled}})
     return {"success": True, "daily_offer": enabled}
 
+# ===== ADMIN CUSTOMERS ROUTE =====
+
+@api_router.get("/admin/customers")
+async def get_customers(current_user: User = Depends(get_current_admin)):
+    """Get all registered customers (admin only)"""
+    customers = await db.users.find({}, {"_id": 0, "password_hash": 0}).to_list(1000)
+    for customer in customers:
+        if isinstance(customer.get('created_at'), str):
+            customer['created_at'] = datetime.fromisoformat(customer['created_at'])
+    return customers
+
 # ===== THEME ROUTES =====
 
 @api_router.get("/theme")
