@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { API, AuthContext } from "@/App";
-import { Package, ArrowLeft, Upload, X, Image as ImageIcon } from "lucide-react";
+import { API } from "@/App";
+import { ArrowLeft, Upload, X, Image as ImageIcon } from "lucide-react";
+import Navbar from "@/components/Navbar";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
