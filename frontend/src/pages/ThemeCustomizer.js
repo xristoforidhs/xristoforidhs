@@ -1,8 +1,9 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { API, AuthContext } from "@/App";
-import { Package, ArrowLeft, Palette, Save } from "lucide-react";
+import { API } from "@/App";
+import { ArrowLeft, Palette, Save } from "lucide-react";
+import Navbar from "@/components/Navbar";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
