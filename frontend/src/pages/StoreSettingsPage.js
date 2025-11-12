@@ -231,28 +231,157 @@ export default function StoreSettingsPage() {
           </TabsContent>
 
           <TabsContent value="advanced">
-            <Card>
-              <CardHeader>
-                <CardTitle>Advanced Settings</CardTitle>
-                <CardDescription>Technical configuration and integrations</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <h3 style={{fontWeight: 600, marginBottom: '0.5rem'}}>CJ Dropshipping Integration</h3>
-                  <p style={{fontSize: '0.875rem', color: '#64748b'}}>CJ API Key is configured in backend .env file</p>
-                  <p style={{fontSize: '0.875rem', color: '#22c55e', marginTop: '0.5rem'}}>✓ Connected and Active</p>
-                </div>
-                <div>
-                  <h3 style={{fontWeight: 600, marginBottom: '0.5rem'}}>Webhook Configuration</h3>
-                  <p style={{fontSize: '0.875rem', color: '#64748b'}}>Stripe webhooks are automatically configured</p>
-                </div>
-                <div style={{background: '#f0f9ff', padding: '1rem', borderRadius: '0.5rem'}}>
-                  <p style={{fontSize: '0.875rem', color: '#1e3a8a'}}>
-                    <strong>Info:</strong> Advanced settings require backend configuration. Contact support for custom integrations.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="space-y-4">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Social Media Integration</CardTitle>
+                  <CardDescription>Connect your social media accounts to display on your store</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <Label htmlFor="tiktok_url">TikTok Profile URL</Label>
+                    <Input
+                      id="tiktok_url"
+                      value={settings?.tiktok_url || ''}
+                      onChange={(e) => handleChange('tiktok_url', e.target.value)}
+                      placeholder="https://www.tiktok.com/@yourusername"
+                    />
+                    <p style={{fontSize: '0.875rem', color: '#64748b', marginTop: '0.5rem'}}>Your TikTok profile link will appear on your store</p>
+                  </div>
+                  <div>
+                    <Label htmlFor="instagram_url">Instagram Profile URL</Label>
+                    <Input
+                      id="instagram_url"
+                      value={settings?.instagram_url || ''}
+                      onChange={(e) => handleChange('instagram_url', e.target.value)}
+                      placeholder="https://www.instagram.com/yourusername"
+                    />
+                    <p style={{fontSize: '0.875rem', color: '#64748b', marginTop: '0.5rem'}}>Your Instagram profile link will appear on your store</p>
+                  </div>
+                  <div>
+                    <Label htmlFor="facebook_url">Facebook Page URL</Label>
+                    <Input
+                      id="facebook_url"
+                      value={settings?.facebook_url || ''}
+                      onChange={(e) => handleChange('facebook_url', e.target.value)}
+                      placeholder="https://www.facebook.com/yourpage"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="twitter_url">Twitter/X Profile URL</Label>
+                    <Input
+                      id="twitter_url"
+                      value={settings?.twitter_url || ''}
+                      onChange={(e) => handleChange('twitter_url', e.target.value)}
+                      placeholder="https://twitter.com/yourusername"
+                    />
+                  </div>
+                  <Button onClick={handleSubmit} disabled={saving}>
+                    <Save size={16} /> {saving ? 'Saving...' : 'Save Social Media Links'}
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Ad Network Integration</CardTitle>
+                  <CardDescription>Monetize your store with display ads - Earn money from visitor clicks!</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div style={{background: '#dcfce7', padding: '1rem', borderRadius: '0.5rem', marginBottom: '1rem'}}>
+                    <p style={{fontSize: '0.875rem', color: '#166534'}}>
+                      <strong>💰 Potential Earnings:</strong><br/>
+                      • 1,000 visitors/day = $50-200/month<br/>
+                      • 5,000 visitors/day = $250-1,000/month<br/>
+                      • Tech gadgets: ~$1-3 per click
+                    </p>
+                  </div>
+
+                  <div>
+                    <h3 style={{fontWeight: 600, marginBottom: '1rem'}}>Google AdSense</h3>
+                    <div className="space-y-3">
+                      <div>
+                        <Label htmlFor="google_adsense_id">AdSense Publisher ID</Label>
+                        <Input
+                          id="google_adsense_id"
+                          value={settings?.google_adsense_id || ''}
+                          onChange={(e) => handleChange('google_adsense_id', e.target.value)}
+                          placeholder="ca-pub-1234567890123456"
+                        />
+                        <p style={{fontSize: '0.875rem', color: '#64748b', marginTop: '0.5rem'}}>Get your ID from adsense.google.com</p>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <input
+                          type="checkbox"
+                          id="google_adsense_enabled"
+                          checked={settings?.google_adsense_enabled || false}
+                          onChange={(e) => handleChange('google_adsense_enabled', e.target.checked)}
+                        />
+                        <Label htmlFor="google_adsense_enabled">Enable Google AdSense</Label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr />
+
+                  <div>
+                    <h3 style={{fontWeight: 600, marginBottom: '1rem'}}>Media.net (Backup)</h3>
+                    <div className="space-y-3">
+                      <div>
+                        <Label htmlFor="medianet_id">Media.net Site ID</Label>
+                        <Input
+                          id="medianet_id"
+                          value={settings?.medianet_id || ''}
+                          onChange={(e) => handleChange('medianet_id', e.target.value)}
+                          placeholder="123456"
+                        />
+                        <p style={{fontSize: '0.875rem', color: '#64748b', marginTop: '0.5rem'}}>Get your ID from media.net</p>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <input
+                          type="checkbox"
+                          id="medianet_enabled"
+                          checked={settings?.medianet_enabled || false}
+                          onChange={(e) => handleChange('medianet_enabled', e.target.checked)}
+                        />
+                        <Label htmlFor="medianet_enabled">Enable Media.net</Label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style={{background: '#fef3c7', padding: '1rem', borderRadius: '0.5rem'}}>
+                    <p style={{fontSize: '0.875rem', color: '#92400e'}}>
+                      <strong>📋 Setup Instructions:</strong><br/>
+                      1. Sign up at adsense.google.com and/or media.net<br/>
+                      2. Get approval for your site (1-3 days)<br/>
+                      3. Copy your Publisher ID<br/>
+                      4. Paste here and enable<br/>
+                      5. Ads will appear automatically on your store!
+                    </p>
+                  </div>
+
+                  <Button onClick={handleSubmit} disabled={saving}>
+                    <Save size={16} /> {saving ? 'Saving...' : 'Save Ad Settings'}
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Integrations Status</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div>
+                    <h3 style={{fontWeight: 600, marginBottom: '0.5rem'}}>CJ Dropshipping</h3>
+                    <p style={{fontSize: '0.875rem', color: '#22c55e'}}>✓ Connected and Active</p>
+                  </div>
+                  <div>
+                    <h3 style={{fontWeight: 600, marginBottom: '0.5rem'}}>Stripe Payments</h3>
+                    <p style={{fontSize: '0.875rem', color: '#22c55e'}}>✓ Configured</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
         </Tabs>
       </div>
