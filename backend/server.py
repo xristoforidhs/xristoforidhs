@@ -249,7 +249,9 @@ class CouponCreate(BaseModel):
 class StoreSettings(BaseModel):
     model_config = ConfigDict(extra="ignore")
     id: str = "store_settings"
-    store_name: str = "TechGadgets"
+    store_name: str = "Alexouko's Store"
+    store_tagline: str = "Quality Products, Great Prices"
+    profit_markup_percentage: float = 100  # 100% markup = 50% profit
     store_email: str = ""
     store_phone: str = ""
     currency: str = "USD"
