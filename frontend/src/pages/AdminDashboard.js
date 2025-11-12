@@ -102,15 +102,26 @@ export default function AdminDashboard() {
   };
 
   const handleDelete = async (productId) => {
-    if (!window.confirm("Είστε σίγουροι;")) return;
+    if (!window.confirm("Are you sure?")) return;
     
     try {
       await axios.delete(`${API}/products/${productId}`);
-      toast.success("Το προϊόν διαγράφηκε");
+      toast.success("Product deleted");
       fetchProducts();
     } catch (error) {
       console.error("Failed to delete product", error);
-      toast.error("Αποτυχία διαγραφής");
+      toast.error("Delete failed");
+    }
+  };
+
+  const toggleDailyOffer = async (productId, enabled) => {
+    try {
+      await axios.put(`${API}/products/${productId}/daily-offer?enabled=${enabled}`);
+      toast.success(enabled ? "Added to Daily Offers!" : "Removed from Daily Offers");
+      fetchProducts();
+    } catch (error) {
+      console.error("Failed to toggle daily offer", error);
+      toast.error("Update failed");
     }
   };
 
