@@ -284,7 +284,7 @@ export default function AdminDashboard() {
 
         {/* Orders Section */}
         <div>
-          <h1 className="section-title">Διαχείριση Παραγγελιών</h1>
+          <h1 className="section-title">Order Management</h1>
           <div>
             {orders.map(order => (
               <div 
