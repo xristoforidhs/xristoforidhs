@@ -101,3 +101,176 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: |
+  User requested a fully-featured automated dropshipping e-commerce store named "Alexouko's Store" with 100+ products from CJ Dropshipping.
+  The store includes product management, admin dashboard, user authentication, theme customization, product reviews, daily offers, social media integration, AdSense monetization, newsletter, and Trustpilot widget.
+  
+  User confirmed to proceed with implementing all pending features including:
+  - Theme Customization Panel
+  - Reviews Page
+  - Admin Image Upload Tool
+  - Newsletter signup in footer
+  - Trustpilot widget integration
+  - 50% profit markup system
+
+backend:
+  - task: "Theme API endpoints (/theme GET and PUT)"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Theme API endpoints already existed in backend. GET /api/theme returns theme settings, PUT /api/theme updates theme settings (admin only)."
+
+  - task: "Reviews API endpoints"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Review endpoints already existed: GET /api/products/{product_id}/reviews and POST /api/reviews to create reviews."
+
+  - task: "Newsletter subscription endpoint"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Newsletter endpoint already existed: POST /api/newsletter/subscribe accepts email and stores in newsletter_subscribers collection."
+
+  - task: "Profit markup calculation system"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Added profit markup system with helper function apply_profit_markup() and two new endpoints: PUT /api/products/{product_id}/calculate-price and POST /api/products/bulk-calculate-prices. Default 100% markup = 50% profit."
+
+frontend:
+  - task: "Theme Customizer page"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/ThemeCustomizer.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "ThemeCustomizer.js already fully implemented with color pickers, font selectors, button styles, quick presets, and live preview. Added route /admin/theme to App.js and link in AdminDashboard."
+
+  - task: "Reviews Page"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/ReviewsPage.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "ReviewsPage.js already fully implemented. Shows all products with reviews, displays ratings and review counts. Added route /reviews to App.js."
+
+  - task: "Footer with Newsletter signup"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Footer.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created comprehensive Footer component with newsletter signup form, quick links, social media links (fetched from settings), and Trustpilot widget placeholder. Integrated into HomePage replacing old footer."
+
+  - task: "Admin Image Upload Tool"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/ImageUploadPage.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created ImageUploadPage.js allowing admins to manage product images. Can add multiple images per product, set main image, and remove images. Added route /admin/images and link in AdminDashboard."
+
+  - task: "Profit markup UI in Store Settings"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/StoreSettingsPage.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Added Profit Markup System section in Shipping & Tax tab of StoreSettingsPage. Shows markup percentage input with explanation of how markup translates to profit margin. Added profit_markup_percentage to StoreSettingsUpdate model."
+
+  - task: "Trustpilot widget integration"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Footer.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Added Trustpilot widget placeholder in Footer component. Shows 5-star rating display with review count. Can be replaced with actual Trustpilot embed code when user has business account."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 0
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Theme API endpoints"
+    - "Newsletter subscription"
+    - "Profit markup calculation"
+    - "Theme Customizer page UI"
+    - "Footer with Newsletter"
+    - "Image Upload Tool"
+    - "Reviews Page"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "main"
+    message: |
+      Completed implementation of all pending features from the mega rebuild:
+      
+      1. ✅ Theme Customization Panel - Already existed, added route and dashboard link
+      2. ✅ Reviews Page - Already existed, added route
+      3. ✅ Admin Image Upload Tool - NEW: Created comprehensive image manager
+      4. ✅ Newsletter signup - NEW: Created Footer component with newsletter form
+      5. ✅ Trustpilot widget - NEW: Added placeholder in Footer
+      6. ✅ Profit Markup System - NEW: Backend logic + UI in Store Settings
+      
+      Ready for backend testing. Need to verify:
+      - Theme API endpoints work correctly
+      - Newsletter subscription endpoint
+      - Profit markup calculation endpoints
+      - All existing product/order/auth endpoints still work
+      
+      Frontend hot reload should show all changes automatically.
