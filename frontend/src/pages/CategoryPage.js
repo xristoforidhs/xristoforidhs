@@ -61,7 +61,7 @@ export default function CategoryPage() {
       <Navbar />
 
       <div style={{maxWidth: '1400px', margin: '3rem auto', padding: '2rem'}}>
-        <h1 className="section-title">{categoryName}</h1>
+        <h1 className="section-title">{decodeURIComponent(categoryName)}</h1>
         <p style={{color: '#64748b', marginBottom: '1rem'}}>{products.length} products</p>
 
         {/* Search Bar */}
