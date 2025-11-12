@@ -60,7 +60,42 @@ export default function CategoryPage() {
 
       <div style={{maxWidth: '1400px', margin: '3rem auto', padding: '2rem'}}>
         <h1 className="section-title">{categoryName}</h1>
-        <p style={{color: '#64748b', marginBottom: '2rem'}}>{products.length} products</p>
+        <p style={{color: '#64748b', marginBottom: '1rem'}}>{products.length} products</p>
+
+        {/* Search Bar */}
+        <div style={{marginBottom: '2rem', display: 'flex', gap: '1rem', maxWidth: '500px'}}>
+          <div style={{position: 'relative', flex: 1}}>
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+              style={{
+                padding: '0.75rem 2.5rem 0.75rem 1rem',
+                borderRadius: '8px',
+                border: '2px solid #e2e8f0',
+                width: '100%',
+                fontSize: '1rem'
+              }}
+            />
+            <button 
+              onClick={handleSearch} 
+              style={{
+                position: 'absolute', 
+                right: '0.5rem', 
+                top: '50%', 
+                transform: 'translateY(-50%)', 
+                background: 'none', 
+                border: 'none', 
+                cursor: 'pointer',
+                color: '#64748b'
+              }}
+            >
+              <Search size={20} />
+            </button>
+          </div>
+        </div>
 
         <div className="products-grid">
           {products.map(product => (
