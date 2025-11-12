@@ -186,6 +186,54 @@ class PaymentTransaction(BaseModel):
 class CheckoutRequest(BaseModel):
     order_id: str
     host_url: str
+    coupon_code: Optional[str] = None
+
+class Coupon(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    code: str
+    discount_type: str  # percentage or fixed
+    discount_value: float
+    min_purchase: Optional[float] = 0
+    max_uses: Optional[int] = None
+    used_count: int = 0
+    valid_from: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    valid_until: Optional[datetime] = None
+    active: bool = True
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class CouponCreate(BaseModel):
+    code: str
+    discount_type: str
+    discount_value: float
+    min_purchase: Optional[float] = 0
+    max_uses: Optional[int] = None
+    valid_until: Optional[str] = None
+
+class StoreSettings(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = "store_settings"
+    store_name: str = "TechGadgets"
+    store_email: str = ""
+    store_phone: str = ""
+    currency: str = "USD"
+    tax_rate: float = 0
+    shipping_flat_rate: float = 0
+    free_shipping_threshold: float = 0
+    stripe_publishable_key: str = ""
+    stripe_secret_key: str = ""
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class StoreSettingsUpdate(BaseModel):
+    store_name: Optional[str] = None
+    store_email: Optional[str] = None
+    store_phone: Optional[str] = None
+    currency: Optional[str] = None
+    tax_rate: Optional[float] = None
+    shipping_flat_rate: Optional[float] = None
+    free_shipping_threshold: Optional[float] = None
+    stripe_publishable_key: Optional[str] = None
+    stripe_secret_key: Optional[str] = None
 
 # ===== AUTH HELPERS =====
 
