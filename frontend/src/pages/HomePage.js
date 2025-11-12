@@ -10,7 +10,6 @@ import Footer from "@/components/Footer";
 export default function HomePage() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart") || "[]"));
-  const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
