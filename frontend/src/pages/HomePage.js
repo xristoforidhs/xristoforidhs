@@ -48,12 +48,16 @@ export default function HomePage() {
         <div className="navbar-container">
           <Link to="/" className="navbar-brand" data-testid="navbar-brand">
             <Package size={28} />
-            TechGadgets
+            Alexouko's Store
           </Link>
           <div className="navbar-links">
+            <Link to="/category/Electronics" className="navbar-link">Electronics</Link>
+            <Link to="/category/Home & Living" className="navbar-link">Home</Link>
+            <Link to="/daily-offers" className="navbar-link" style={{color: '#f59e0b', fontWeight: 600}}>Daily Offers</Link>
+            <Link to="/social" className="navbar-link">Social</Link>
             <Link to="/cart" className="navbar-link" data-testid="cart-link">
               <ShoppingCart size={20} />
-              Καλάθι {cartCount > 0 && <span className="cart-badge" data-testid="cart-count">{cartCount}</span>}
+              Cart {cartCount > 0 && <span className="cart-badge" data-testid="cart-count">{cartCount}</span>}
             </Link>
             {user ? (
               <>
@@ -63,15 +67,15 @@ export default function HomePage() {
                   </Link>
                 )}
                 <Link to="/orders" className="navbar-link" data-testid="orders-link">
-                  Παραγγελίες
+                  Orders
                 </Link>
                 <button onClick={logout} className="navbar-link" style={{background: 'none', border: 'none', cursor: 'pointer'}} data-testid="logout-btn">
-                  <LogOut size={20} /> Αποσύνδεση
+                  <LogOut size={20} /> Logout
                 </button>
               </>
             ) : (
               <Link to="/auth" className="navbar-link" data-testid="login-link">
-                <User size={20} /> Σύνδεση
+                <User size={20} /> Login
               </Link>
             )}
           </div>
@@ -79,8 +83,8 @@ export default function HomePage() {
       </nav>
 
       <div className="hero-section" data-testid="hero-section">
-        <h1 className="hero-title">Τα Καλύτερα Tech Gadgets του 2025</h1>
-        <p className="hero-subtitle">Ανακαλύψτε τα πιο καινοτόμα προϊόντα τεχνολογίας</p>
+        <h1 className="hero-title">Alexouko's Store</h1>
+        <p className="hero-subtitle">Quality Products, Great Prices</p>
       </div>
 
       <div className="products-section">
