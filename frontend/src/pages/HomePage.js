@@ -119,9 +119,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <footer className="footer">
-        <p>© 2025 TechGadgets - Το κορυφαίο e-shop για gadgets</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
