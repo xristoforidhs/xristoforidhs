@@ -178,75 +178,96 @@ backend:
 frontend:
   - task: "Theme Customizer page"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/pages/ThemeCustomizer.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "ThemeCustomizer.js already fully implemented with color pickers, font selectors, button styles, quick presets, and live preview. Added route /admin/theme to App.js and link in AdminDashboard."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Theme Customizer fully functional. Found 4 color picker inputs, 11 preset theme buttons, live preview section working. Successfully tested changing primary color to orange, selecting Forest preset theme, and saving theme with success toast notification. All features working perfectly."
 
   - task: "Reviews Page"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/pages/ReviewsPage.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "ReviewsPage.js already fully implemented. Shows all products with reviews, displays ratings and review counts. Added route /reviews to App.js."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Reviews page accessible at /reviews. Successfully displays 101 products with reviews, shows star ratings and review counts. Navigation from homepage works correctly. Page title 'Customer Reviews' displays properly."
 
   - task: "Footer with Newsletter signup"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/components/Footer.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Created comprehensive Footer component with newsletter signup form, quick links, social media links (fetched from settings), and Trustpilot widget placeholder. Integrated into HomePage replacing old footer."
+      - working: false
+        agent: "testing"
+        comment: "❌ ISSUE FOUND: Newsletter subscription failing with 422 error. Frontend sending email in request body but backend expects it as query parameter."
+      - working: true
+        agent: "testing"
+        comment: "✅ FIXED & TESTED: Fixed newsletter API call to send email as query parameter instead of request body. Newsletter subscription now works correctly with success toast notification. Trustpilot widget placeholder visible in footer."
 
   - task: "Admin Image Upload Tool"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/pages/ImageUploadPage.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Created ImageUploadPage.js allowing admins to manage product images. Can add multiple images per product, set main image, and remove images. Added route /admin/images and link in AdminDashboard."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Image Upload tool fully functional. Found 102 product cards for image management with 101 image URL input fields. Successfully tested adding image URL to product with success toast notification. Admin authentication required and working."
 
   - task: "Profit markup UI in Store Settings"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/pages/StoreSettingsPage.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Added Profit Markup System section in Shipping & Tax tab of StoreSettingsPage. Shows markup percentage input with explanation of how markup translates to profit margin. Added profit_markup_percentage to StoreSettingsUpdate model."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Profit Markup System fully functional in Store Settings > Shipping & Tax tab. Shows markup percentage input (currently 120%), detailed explanation of profit margin calculations, and current setting display (120% markup = 54.5% profit margin). Save Changes button working."
 
   - task: "Trustpilot widget integration"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/components/Footer.js"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Added Trustpilot widget placeholder in Footer component. Shows 5-star rating display with review count. Can be replaced with actual Trustpilot embed code when user has business account."
+      - working: true
+        agent: "testing"
+        comment: "✅ TESTED: Trustpilot widget placeholder visible in footer with 5-star rating display, review count (1,247 reviews), and Trustpilot branding. Ready for replacement with actual Trustpilot embed code when business account is available."
 
 metadata:
   created_by: "main_agent"
