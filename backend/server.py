@@ -909,6 +909,67 @@ async def update_store_settings(settings_input: StoreSettingsUpdate, current_use
         settings['updated_at'] = datetime.fromisoformat(settings['updated_at'])
     return StoreSettings(**settings)
 
+# ===== PROFIT MARKUP HELPER =====
+
+async def apply_profit_markup(cost_price: float) -> float:
+    """Calculate selling price based on cost price and markup percentage from settings"""
+    settings = await db.store_settings.find_one({"id": "store_settings"}, {"_id": 0})
+    if settings and settings.get('profit_markup_percentage'):
+        markup_percentage = settings['profit_markup_percentage']
+    else:
+        markup_percentage = 100  # Default 100% markup = 50% profit
+    
+    selling_price = cost_price * (1 + markup_percentage / 100)
+    return round(selling_price, 2)
+
+@api_router.put("/products/{product_id}/calculate-price")
+async def calculate_product_price(product_id: str, cost_price: float, current_user: User = Depends(get_current_admin)):
+    """Calculate and update product price based on cost and markup settings"""
+    product = await db.products.find_one({"id": product_id})
+    if not product:
+        raise HTTPException(status_code=404, detail="Product not found")
+    
+    # Calculate selling price
+    selling_price = await apply_profit_markup(cost_price)
+    
+    # Update product
+    await db.products.update_one(
+        {"id": product_id},
+        {"$set": {
+            "cost_price": cost_price,
+            "price": selling_price
+        }}
+    )
+    
+    return {
+        "success": True,
+        "cost_price": cost_price,
+        "selling_price": selling_price,
+        "profit": selling_price - cost_price,
+        "profit_percentage": round(((selling_price - cost_price) / cost_price) * 100, 2)
+    }
+
+@api_router.post("/products/bulk-calculate-prices")
+async def bulk_calculate_prices(current_user: User = Depends(get_current_admin)):
+    """Recalculate all product prices based on their cost_price and current markup settings"""
+    products = await db.products.find({}, {"_id": 0}).to_list(10000)
+    updated_count = 0
+    
+    for product in products:
+        if product.get('cost_price', 0) > 0:
+            selling_price = await apply_profit_markup(product['cost_price'])
+            await db.products.update_one(
+                {"id": product['id']},
+                {"$set": {"price": selling_price}}
+            )
+            updated_count += 1
+    
+    return {
+        "success": True,
+        "updated_count": updated_count,
+        "message": f"Updated {updated_count} product prices"
+    }
+
 # ===== REVIEWS ROUTES =====
 
 @api_router.get("/products/{product_id}/reviews", response_model=List[Review])
