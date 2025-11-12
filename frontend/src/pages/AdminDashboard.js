@@ -164,6 +164,11 @@ export default function AdminDashboard() {
               👥 View Customers
             </Button>
           </Link>
+          <Link to="/admin/theme" data-testid="theme-link">
+            <Button variant="outline">
+              🎨 Theme Customizer
+            </Button>
+          </Link>
         </div>
 
         {/* Products Section */}
