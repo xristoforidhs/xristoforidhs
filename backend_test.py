@@ -174,15 +174,17 @@ class BackendTester:
         # Test POST /api/newsletter/subscribe (no auth required)
         test_email = f"newsletter_{uuid.uuid4()}@example.com"
         
-        # The endpoint expects email as a query parameter based on the FastAPI signature
-        success, response, status = await self.make_request("POST", "/newsletter/subscribe", params={"email": test_email})
+        # The endpoint expects email in request body as JSON
+        newsletter_data = {"email": test_email}
+        
+        success, response, status = await self.make_request("POST", "/newsletter/subscribe", newsletter_data)
         if success and "message" in response:
             self.log_result("Newsletter Subscribe", True, f"Subscription successful: {response.get('message')}")
         else:
             self.log_result("Newsletter Subscribe", False, f"Status: {status}", response)
         
         # Test duplicate subscription
-        success, response, status = await self.make_request("POST", "/newsletter/subscribe", params={"email": test_email})
+        success, response, status = await self.make_request("POST", "/newsletter/subscribe", newsletter_data)
         if success and "already subscribed" in response.get("message", "").lower():
             self.log_result("Newsletter Duplicate Subscribe", True, "Correctly handled duplicate subscription")
         else:
