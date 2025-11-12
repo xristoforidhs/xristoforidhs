@@ -91,22 +91,6 @@ class BackendTester:
         else:
             self.log_result("User Registration", False, f"Status: {status}", response)
         
-        # Test admin registration (create admin user)
-        admin_data = {
-            "email": f"admin_{self.test_admin_id}@example.com", 
-            "name": "Test Admin",
-            "password": "adminpassword123"
-        }
-        
-        success, response, status = await self.make_request("POST", "/auth/register", admin_data)
-        if success and "token" in response:
-            # Note: In real app, admin role would be set manually in DB
-            # For testing, we'll assume the first user or use existing admin
-            self.admin_token = response["token"]
-            self.log_result("Admin Registration", True, f"Admin registered (role needs manual DB update)")
-        else:
-            self.log_result("Admin Registration", False, f"Status: {status}", response)
-        
         # Test user login
         login_data = {
             "email": user_data["email"],
@@ -119,6 +103,31 @@ class BackendTester:
             self.log_result("User Login", True, f"Login successful")
         else:
             self.log_result("User Login", False, f"Status: {status}", response)
+        
+        # Test login with existing admin user (if exists)
+        admin_login_data = {
+            "email": "admin_17be2652-9553-46b8-a957-1d7d81a751d1@example.com",
+            "password": "adminpassword123"
+        }
+        
+        success, response, status = await self.make_request("POST", "/auth/login", admin_login_data)
+        if success and "token" in response:
+            self.admin_token = response["token"]
+            self.log_result("Admin Login", True, f"Admin login successful")
+        else:
+            # Try to register new admin if login fails
+            admin_data = {
+                "email": f"admin_{self.test_admin_id}@example.com", 
+                "name": "Test Admin",
+                "password": "adminpassword123"
+            }
+            
+            success, response, status = await self.make_request("POST", "/auth/register", admin_data)
+            if success and "token" in response:
+                self.admin_token = response["token"]
+                self.log_result("Admin Registration", True, f"Admin registered (role needs manual DB update)")
+            else:
+                self.log_result("Admin Registration", False, f"Status: {status}", response)
         
         # Test get current user info
         if self.user_token:
