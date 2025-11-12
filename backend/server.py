@@ -222,6 +222,16 @@ class StoreSettings(BaseModel):
     free_shipping_threshold: float = 0
     stripe_publishable_key: str = ""
     stripe_secret_key: str = ""
+    # Social Media
+    tiktok_url: str = ""
+    instagram_url: str = ""
+    facebook_url: str = ""
+    twitter_url: str = ""
+    # Ad Networks
+    google_adsense_id: str = ""
+    google_adsense_enabled: bool = False
+    medianet_id: str = ""
+    medianet_enabled: bool = False
     updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class StoreSettingsUpdate(BaseModel):
@@ -234,6 +244,14 @@ class StoreSettingsUpdate(BaseModel):
     free_shipping_threshold: Optional[float] = None
     stripe_publishable_key: Optional[str] = None
     stripe_secret_key: Optional[str] = None
+    tiktok_url: Optional[str] = None
+    instagram_url: Optional[str] = None
+    facebook_url: Optional[str] = None
+    twitter_url: Optional[str] = None
+    google_adsense_id: Optional[str] = None
+    google_adsense_enabled: Optional[bool] = None
+    medianet_id: Optional[str] = None
+    medianet_enabled: Optional[bool] = None
 
 # ===== AUTH HELPERS =====
 
