@@ -53,7 +53,6 @@ export default function HomePage() {
       </div>
 
       <div className="products-section">
-        <h2 className="section-title">Κορυφαία Προϊόντα</h2>
         <div className="products-grid" data-testid="products-grid">
           {products.map(product => (
             <div key={product.id} className="product-card" data-testid={`product-card-${product.id}`}>
