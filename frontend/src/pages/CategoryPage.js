@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API } from "@/App";
-import { Package, ShoppingCart, Search } from "lucide-react";
+import { ShoppingCart, Search } from "lucide-react";
 import { toast } from "sonner";
+import Navbar from "@/components/Navbar";
 
 export default function CategoryPage() {
   const { categoryName } = useParams();
