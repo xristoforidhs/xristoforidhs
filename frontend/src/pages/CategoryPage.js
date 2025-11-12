@@ -32,7 +32,7 @@ export default function CategoryPage() {
       return;
     }
     try {
-      const response = await axios.get(`${API}/products?category=${categoryName}&search=${searchQuery}`);
+      const response = await axios.get(`${API}/products?category=${categoryName}&search=${searchQuery}&limit=1000`);
       setProducts(response.data);
     } catch (error) {
       toast.error("Search failed");
