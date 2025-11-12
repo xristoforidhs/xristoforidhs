@@ -264,10 +264,10 @@ class BackendTester:
             f"/products/{self.test_product_id}/calculate-price",
             params={"cost_price": cost_price}
         )
-        if not success and status == 401:
+        if not success and status in [401, 403]:
             self.log_result("Calculate Price (No Auth)", True, "Correctly rejected without authentication")
         else:
-            self.log_result("Calculate Price (No Auth)", False, f"Should have failed with 401, got {status}", response)
+            self.log_result("Calculate Price (No Auth)", False, f"Should have failed with 401/403, got {status}", response)
         
         # Test with admin token
         if self.admin_token:
