@@ -223,6 +223,33 @@ export default function StoreSettingsPage() {
                   />
                   <p style={{fontSize: '0.875rem', color: '#64748b', marginTop: '0.5rem'}}>Sales tax percentage (e.g., 8.5 for 8.5%)</p>
                 </div>
+
+                <div style={{background: '#f0f9ff', padding: '1.5rem', borderRadius: '0.5rem', border: '2px solid #3b82f6'}}>
+                  <h4 style={{fontSize: '1.125rem', fontWeight: 600, marginBottom: '1rem', color: '#1e40af'}}>💰 Profit Markup System</h4>
+                  <div>
+                    <Label htmlFor="profit_markup_percentage">Profit Markup Percentage (%)</Label>
+                    <Input
+                      id="profit_markup_percentage"
+                      type="number"
+                      step="1"
+                      value={settings?.profit_markup_percentage || 100}
+                      onChange={(e) => handleChange('profit_markup_percentage', parseFloat(e.target.value) || 100)}
+                      placeholder="100"
+                    />
+                    <div style={{fontSize: '0.875rem', color: '#64748b', marginTop: '0.75rem', lineHeight: 1.6}}>
+                      <p><strong>How it works:</strong> This percentage is added to the cost price to determine the selling price.</p>
+                      <p style={{marginTop: '0.5rem'}}>
+                        • <strong>100% markup</strong> = 50% profit margin (Cost $10 → Sell $20)<br/>
+                        • <strong>150% markup</strong> = 60% profit margin (Cost $10 → Sell $25)<br/>
+                        • <strong>200% markup</strong> = 66.7% profit margin (Cost $10 → Sell $30)
+                      </p>
+                      <p style={{marginTop: '0.5rem', color: '#2563eb', fontWeight: 600}}>
+                        Current setting: {settings?.profit_markup_percentage || 100}% markup = {(((settings?.profit_markup_percentage || 100) / (100 + (settings?.profit_markup_percentage || 100))) * 100).toFixed(1)}% profit margin
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
                 <Button onClick={handleSubmit} disabled={saving}>
                   <Save size={16} /> {saving ? 'Saving...' : 'Save Changes'}
                 </Button>
