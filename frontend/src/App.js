@@ -11,6 +11,10 @@ import AdminDashboard from "@/pages/AdminDashboard";
 import OrdersPage from "@/pages/OrdersPage";
 import AuthPage from "@/pages/AuthPage";
 import StoreSettingsPage from "@/pages/StoreSettingsPage";
+import CategoryPage from "@/pages/CategoryPage";
+import DailyOffersPage from "@/pages/DailyOffersPage";
+import SocialPage from "@/pages/SocialPage";
+import CustomersPage from "@/pages/CustomersPage";
 import { Toaster } from "@/components/ui/sonner";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
