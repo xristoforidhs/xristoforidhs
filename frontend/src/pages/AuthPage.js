@@ -167,7 +167,7 @@ export default function AuthPage() {
               style={{width: '100%', marginBottom: '1rem'}}
               data-testid="submit-btn"
             >
-              {loading ? 'Παρακαλώ περιμένετε...' : (isLogin ? 'Σύνδεση' : 'Εγγραφή')}
+              {loading ? 'Please wait...' : (isLogin ? 'Login' : 'Sign Up')}
             </button>
           </form>
 
