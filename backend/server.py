@@ -902,6 +902,82 @@ async def update_store_settings(settings_input: StoreSettingsUpdate, current_use
         settings['updated_at'] = datetime.fromisoformat(settings['updated_at'])
     return StoreSettings(**settings)
 
+# ===== REVIEWS ROUTES =====
+
+@api_router.get("/products/{product_id}/reviews", response_model=List[Review])
+async def get_product_reviews(product_id: str):
+    """Get all reviews for a product"""
+    reviews = await db.reviews.find({"product_id": product_id}, {"_id": 0}).sort("created_at", -1).to_list(1000)
+    for review in reviews:
+        if isinstance(review.get('created_at'), str):
+            review['created_at'] = datetime.fromisoformat(review['created_at'])
+    return reviews
+
+@api_router.post("/reviews", response_model=Review)
+async def create_review(review_input: ReviewCreate, current_user: User = Depends(get_current_user)):
+    """Create a new review"""
+    review = Review(
+        product_id=review_input.product_id,
+        user_id=current_user.id,
+        user_name=current_user.name,
+        rating=review_input.rating,
+        comment=review_input.comment,
+        verified_purchase=True
+    )
+    
+    doc = review.model_dump()
+    doc['created_at'] = doc['created_at'].isoformat()
+    await db.reviews.insert_one(doc)
+    
+    # Update product rating
+    await update_product_rating(review_input.product_id)
+    
+    return review
+
+async def update_product_rating(product_id: str):
+    """Recalculate product rating based on reviews"""
+    reviews = await db.reviews.find({"product_id": product_id}).to_list(1000)
+    if reviews:
+        avg_rating = sum(r['rating'] for r in reviews) / len(reviews)
+        await db.products.update_one(
+            {"id": product_id},
+            {"$set": {"rating": round(avg_rating, 1), "review_count": len(reviews)}}
+        )
+
+@api_router.put("/products/{product_id}/daily-offer")
+async def toggle_daily_offer(product_id: str, enabled: bool, current_user: User = Depends(get_current_admin)):
+    """Toggle product as daily offer"""
+    await db.products.update_one({"id": product_id}, {"$set": {"daily_offer": enabled}})
+    return {"success": True, "daily_offer": enabled}
+
+# ===== THEME ROUTES =====
+
+@api_router.get("/theme")
+async def get_theme():
+    """Get theme settings (public)"""
+    theme = await db.theme_settings.find_one({"id": "theme_settings"}, {"_id": 0})
+    if not theme:
+        default_theme = ThemeSettings()
+        doc = default_theme.model_dump()
+        doc['updated_at'] = doc['updated_at'].isoformat()
+        await db.theme_settings.insert_one(doc)
+        return default_theme
+    
+    if isinstance(theme.get('updated_at'), str):
+        theme['updated_at'] = datetime.fromisoformat(theme['updated_at'])
+    return ThemeSettings(**theme)
+
+@api_router.put("/theme")
+async def update_theme(theme_data: dict, current_user: User = Depends(get_current_admin)):
+    """Update theme settings (admin only)"""
+    theme_data['updated_at'] = datetime.now(timezone.utc).isoformat()
+    await db.theme_settings.update_one(
+        {"id": "theme_settings"},
+        {"$set": theme_data},
+        upsert=True
+    )
+    return {"success": True}
+
 app.include_router(api_router)
 
 app.add_middleware(
