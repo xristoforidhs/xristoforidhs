@@ -18,7 +18,8 @@ export default function CategoryPage() {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get(`${API}/products?category=${categoryName}&limit=1000`);
+      const decodedCategory = decodeURIComponent(categoryName);
+      const response = await axios.get(`${API}/products?category=${encodeURIComponent(decodedCategory)}&limit=1000`);
       setProducts(response.data);
     } catch (error) {
       console.error("Failed to fetch products", error);
