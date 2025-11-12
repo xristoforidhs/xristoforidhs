@@ -53,7 +53,7 @@ export default function HomePage() {
           </Link>
           <div className="navbar-links">
             <Link to="/" className="navbar-link">Home</Link>
-            <Link to="/category/Electronics" className="navbar-link">Categories</Link>
+            <CategoryDropdown />
             <Link to="/daily-offers" className="navbar-link" style={{color: '#f59e0b', fontWeight: 600}}>Daily Offers</Link>
             <Link to="/social" className="navbar-link">Socials</Link>
             <Link to="/cart" className="navbar-link" data-testid="cart-link">
