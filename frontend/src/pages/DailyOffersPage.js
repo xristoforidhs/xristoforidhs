@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API } from "@/App";
-import { Package, ShoppingCart, Zap } from "lucide-react";
+import { ShoppingCart, Zap } from "lucide-react";
 import { toast } from "sonner";
+import Navbar from "@/components/Navbar";
 
 export default function DailyOffersPage() {
   const [products, setProducts] = useState([]);
