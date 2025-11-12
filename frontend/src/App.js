@@ -96,5 +96,4 @@ function App() {
   );
 }
 
-import React from "react";
 export default App;
