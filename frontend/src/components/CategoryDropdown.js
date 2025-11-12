@@ -7,7 +7,7 @@ export default function CategoryDropdown() {
 
   const categories = [
     { name: "Electronics", path: "/category/Electronics" },
-    { name: "Home & Living", path: "/category/Home & Living" }
+    { name: "Home & Living", path: "/category/Home%20%26%20Living" }
   ];
 
   return (
