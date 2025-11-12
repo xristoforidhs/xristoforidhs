@@ -142,10 +142,15 @@ export default function AdminDashboard() {
         </Link>
 
         {/* Admin Actions */}
-        <div style={{display: 'flex', gap: '1rem', marginBottom: '2rem'}}>
+        <div style={{display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap'}}>
           <Link to="/admin/settings" data-testid="settings-link">
             <Button variant="outline">
               ⚙️ Store Settings
+            </Button>
+          </Link>
+          <Link to="/admin/customers" data-testid="customers-link">
+            <Button variant="outline">
+              👥 View Customers
             </Button>
           </Link>
         </div>
