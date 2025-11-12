@@ -418,8 +418,8 @@ async def main():
         await tester.test_auth_endpoints()
         await tester.test_theme_endpoints()
         await tester.test_newsletter_endpoints()
+        await tester.test_products_endpoints()  # Run this before profit markup
         await tester.test_profit_markup_endpoints()
-        await tester.test_products_endpoints()
         await tester.test_reviews_endpoints()
         await tester.test_settings_endpoints()
         await tester.test_additional_endpoints()
