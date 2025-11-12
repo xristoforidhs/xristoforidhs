@@ -51,10 +51,10 @@ export default function HomePage() {
             Alexouko's Store
           </Link>
           <div className="navbar-links">
-            <Link to="/category/Electronics" className="navbar-link">Electronics</Link>
-            <Link to="/category/Home & Living" className="navbar-link">Home</Link>
+            <Link to="/" className="navbar-link">Home</Link>
+            <Link to="/category/Electronics" className="navbar-link">Categories</Link>
             <Link to="/daily-offers" className="navbar-link" style={{color: '#f59e0b', fontWeight: 600}}>Daily Offers</Link>
-            <Link to="/social" className="navbar-link">Social</Link>
+            <Link to="/social" className="navbar-link">Socials</Link>
             <Link to="/cart" className="navbar-link" data-testid="cart-link">
               <ShoppingCart size={20} />
               Cart {cartCount > 0 && <span className="cart-badge" data-testid="cart-count">{cartCount}</span>}
