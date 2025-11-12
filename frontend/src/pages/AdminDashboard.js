@@ -169,6 +169,11 @@ export default function AdminDashboard() {
               🎨 Theme Customizer
             </Button>
           </Link>
+          <Link to="/admin/images" data-testid="images-link">
+            <Button variant="outline">
+              🖼️ Image Manager
+            </Button>
+          </Link>
         </div>
 
         {/* Products Section */}
