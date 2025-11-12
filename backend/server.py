@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, HTTPException, Depends, Request, Header
+from fastapi import FastAPI, APIRouter, HTTPException, Depends, Request, Header, BackgroundTasks
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
@@ -13,6 +13,7 @@ from datetime import datetime, timezone, timedelta
 from passlib.context import CryptContext
 from jose import JWTError, jwt
 from emergentintegrations.payments.stripe.checkout import StripeCheckout, CheckoutSessionResponse, CheckoutStatusResponse, CheckoutSessionRequest
+import httpx
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -32,8 +33,65 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7  # 7 days
 # Stripe
 STRIPE_API_KEY = os.environ.get("STRIPE_API_KEY")
 
+# CJ Dropshipping
+CJ_API_KEY = os.environ.get("CJ_API_KEY", "")
+CJ_API_BASE_URL = "https://developers.cjdropshipping.com/api2.0/v1"
+
 app = FastAPI()
 api_router = APIRouter(prefix="/api")
+
+# ===== CJ DROPSHIPPING CLIENT =====
+
+class CJDropshippingClient:
+    def __init__(self):
+        self.base_url = CJ_API_BASE_URL
+        self.api_key = CJ_API_KEY
+        self.access_token = None
+        self.client = httpx.AsyncClient(timeout=30.0)
+    
+    async def authenticate(self):
+        """Authenticate with CJ Dropshipping API"""
+        try:
+            response = await self.client.post(
+                f"{self.base_url}/authentication/getAccessToken",
+                json={"apiKey": self.api_key}
+            )
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("code") == 200:
+                    self.access_token = data["data"]["accessToken"]
+                    return True
+        except Exception as e:
+            logging.error(f"CJ Authentication failed: {e}")
+        return False
+    
+    async def get_headers(self):
+        if not self.access_token:
+            await self.authenticate()
+        return {
+            "CJ-Access-Token": self.access_token,
+            "Content-Type": "application/json"
+        }
+    
+    async def create_order(self, order_data: Dict):
+        """Create order on CJ Dropshipping"""
+        try:
+            headers = await self.get_headers()
+            response = await self.client.post(
+                f"{self.base_url}/shopping/order/create",
+                headers=headers,
+                json=order_data
+            )
+            if response.status_code == 200:
+                data = response.json()
+                if data.get("code") == 200:
+                    return data["data"]
+        except Exception as e:
+            logging.error(f"CJ Order creation failed: {e}")
+        return None
+
+# Global CJ client
+cj_client = CJDropshippingClient()
 
 # ===== MODELS =====
 
@@ -71,6 +129,9 @@ class Product(BaseModel):
     category: str
     stock: int
     featured: bool = False
+    cj_product_id: Optional[str] = None
+    cj_variant_id: Optional[str] = None
+    supplier: str = "cj_dropshipping"
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class ProductCreate(BaseModel):
@@ -96,13 +157,18 @@ class Order(BaseModel):
     user_name: str
     items: List[OrderItem]
     total_amount: float
-    status: str = "pending"  # pending, processing, completed, cancelled
+    status: str = "pending"  # pending, processing, dispatched, completed, cancelled
     payment_status: str = "pending"  # pending, paid, failed
     stripe_session_id: Optional[str] = None
+    cj_order_id: Optional[str] = None
+    tracking_number: Optional[str] = None
+    fulfillment_status: str = "unfulfilled"  # unfulfilled, submitted_to_supplier, fulfilled
+    shipping_address: Optional[str] = None
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class OrderCreate(BaseModel):
     items: List[OrderItem]
+    shipping_address: Optional[Dict] = None
 
 class PaymentTransaction(BaseModel):
     model_config = ConfigDict(extra="ignore")
@@ -155,6 +221,42 @@ async def get_current_admin(current_user: User = Depends(get_current_user)):
     if current_user.role != "admin":
         raise HTTPException(status_code=403, detail="Not authorized")
     return current_user
+
+# ===== BACKGROUND TASKS =====
+
+async def submit_order_to_cj(order_id: str, order_data: Dict):
+    """Submit order to CJ Dropshipping in background"""
+    try:
+        logging.info(f"Submitting order {order_id} to CJ Dropshipping")
+        
+        # Create order on CJ Dropshipping
+        cj_response = await cj_client.create_order(order_data)
+        
+        if cj_response and cj_response.get("orderId"):
+            cj_order_id = cj_response["orderId"]
+            
+            # Update order with CJ order ID
+            await db.orders.update_one(
+                {"id": order_id},
+                {"$set": {
+                    "cj_order_id": cj_order_id,
+                    "fulfillment_status": "submitted_to_supplier",
+                    "updated_at": datetime.now(timezone.utc).isoformat()
+                }}
+            )
+            logging.info(f"Order {order_id} submitted to CJ with ID {cj_order_id}")
+        else:
+            logging.error(f"Failed to submit order {order_id} to CJ Dropshipping")
+            await db.orders.update_one(
+                {"id": order_id},
+                {"$set": {"fulfillment_status": "failed"}}
+            )
+    except Exception as e:
+        logging.error(f"Error submitting order to CJ: {e}")
+        await db.orders.update_one(
+            {"id": order_id},
+            {"$set": {"fulfillment_status": "failed"}}
+        )
 
 # ===== AUTH ROUTES =====
 
@@ -280,7 +382,7 @@ async def get_order(order_id: str, current_user: User = Depends(get_current_user
     return Order(**order)
 
 @api_router.post("/orders", response_model=Order)
-async def create_order(order_input: OrderCreate, current_user: User = Depends(get_current_user)):
+async def create_order(order_input: OrderCreate, background_tasks: BackgroundTasks, current_user: User = Depends(get_current_user)):
     # Calculate total
     total = sum(item.price * item.quantity for item in order_input.items)
     
@@ -289,7 +391,8 @@ async def create_order(order_input: OrderCreate, current_user: User = Depends(ge
         user_email=current_user.email,
         user_name=current_user.name,
         items=[item.model_dump() for item in order_input.items],
-        total_amount=total
+        total_amount=total,
+        shipping_address=str(order_input.shipping_address) if order_input.shipping_address else None
     )
     
     doc = order.model_dump()
@@ -308,7 +411,7 @@ async def update_order_status(order_id: str, status: str, current_user: User = D
 # ===== STRIPE PAYMENT ROUTES =====
 
 @api_router.post("/checkout/session")
-async def create_checkout_session(checkout_req: CheckoutRequest, current_user: User = Depends(get_current_user)):
+async def create_checkout_session(checkout_req: CheckoutRequest, background_tasks: BackgroundTasks, current_user: User = Depends(get_current_user)):
     # Get order
     order = await db.orders.find_one({"id": checkout_req.order_id}, {"_id": 0})
     if not order:
@@ -362,7 +465,7 @@ async def create_checkout_session(checkout_req: CheckoutRequest, current_user: U
     return {"url": session.url, "session_id": session.session_id}
 
 @api_router.get("/checkout/status/{session_id}")
-async def get_checkout_status(session_id: str, current_user: User = Depends(get_current_user)):
+async def get_checkout_status(session_id: str, background_tasks: BackgroundTasks, current_user: User = Depends(get_current_user)):
     # Get transaction
     transaction = await db.payment_transactions.find_one({"session_id": session_id}, {"_id": 0})
     if not transaction:
@@ -404,6 +507,36 @@ async def get_checkout_status(session_id: str, current_user: User = Depends(get_
                     "status": "processing"
                 }}
             )
+            
+            # Get order details for CJ submission
+            order = await db.orders.find_one({"id": transaction['order_id']}, {"_id": 0})
+            
+            # Submit to CJ Dropshipping in background if API key is configured
+            if CJ_API_KEY and order:
+                # Prepare CJ order data
+                product_list = []
+                for item in order['items']:
+                    product = await db.products.find_one({"id": item['product_id']}, {"_id": 0})
+                    if product and product.get('cj_variant_id'):
+                        product_list.append({
+                            "vid": product['cj_variant_id'],
+                            "quantity": item['quantity'],
+                            "productPrice": float(item['price'])
+                        })
+                
+                if product_list:
+                    cj_order_data = {
+                        "productList": product_list,
+                        "orderAmount": float(order['total_amount']),
+                        "shipAddress": {
+                            "name": order['user_name'],
+                            "email": order['user_email'],
+                            "country": "US",
+                            "address": order.get('shipping_address', '')
+                        },
+                        "payType": 1
+                    }
+                    background_tasks.add_task(submit_order_to_cj, order['id'], cj_order_data)
         
         return {
             "status": checkout_status.status,
@@ -468,3 +601,4 @@ logger = logging.getLogger(__name__)
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
+    await cj_client.client.aclose()
