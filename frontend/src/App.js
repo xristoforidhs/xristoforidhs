@@ -15,6 +15,8 @@ import CategoryPage from "@/pages/CategoryPage";
 import DailyOffersPage from "@/pages/DailyOffersPage";
 import SocialPage from "@/pages/SocialPage";
 import CustomersPage from "@/pages/CustomersPage";
+import ThemeCustomizer from "@/pages/ThemeCustomizer";
+import ReviewsPage from "@/pages/ReviewsPage";
 import { Toaster } from "@/components/ui/sonner";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
