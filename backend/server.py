@@ -291,6 +291,13 @@ class StoreSettingsUpdate(BaseModel):
     medianet_id: Optional[str] = None
     medianet_enabled: Optional[bool] = None
 
+class NewsletterSubscriber(BaseModel):
+    model_config = ConfigDict(extra=\"ignore\")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    email: EmailStr
+    subscribed: bool = True
+    subscribed_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
 # ===== AUTH HELPERS =====
 
 def verify_password(plain_password, hashed_password):
