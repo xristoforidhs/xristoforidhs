@@ -172,14 +172,14 @@ export default function AuthPage() {
           </form>
 
           <p style={{textAlign: 'center', color: '#64748b', fontSize: '0.875rem'}}>
-            {isLogin ? 'Δεν έχετε λογαριασμό;' : 'Έχετε ήδη λογαριασμό;'}
+            {isLogin ? "Don't have an account?" : 'Already have an account?'}
             {' '}
             <button 
               onClick={() => setIsLogin(!isLogin)}
               style={{background: 'none', border: 'none', color: '#2563eb', fontWeight: 600, cursor: 'pointer'}}
               data-testid="toggle-auth-mode"
             >
-              {isLogin ? 'Εγγραφή' : 'Σύνδεση'}
+              {isLogin ? 'Sign Up' : 'Login'}
             </button>
           </p>
         </div>
