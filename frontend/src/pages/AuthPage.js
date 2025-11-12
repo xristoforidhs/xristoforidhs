@@ -54,10 +54,59 @@ export default function AuthPage() {
             {isLogin ? 'Καλωσήρθατε πίσω!' : 'Δημιουργήστε λογαριασμό'}
           </p>
 
+          {!isLogin && (
+            <div style={{marginBottom: '2rem'}}>
+              <div style={{display: 'flex', gap: '0.5rem', marginBottom: '1rem'}}>
+                <button 
+                  type="button"
+                  onClick={() => toast.info("Google Sign In coming soon!")}
+                  style={{
+                    flex: 1,
+                    padding: '0.75rem',
+                    border: '2px solid #e2e8f0',
+                    borderRadius: '8px',
+                    background: 'white',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.5rem',
+                    fontSize: '0.875rem',
+                    fontWeight: 600
+                  }}
+                >
+                  <img src="https://www.google.com/favicon.ico" alt="Google" style={{width: '18px', height: '18px'}} />
+                  Google
+                </button>
+                <button 
+                  type="button"
+                  onClick={() => toast.info("Apple Sign In coming soon!")}
+                  style={{
+                    flex: 1,
+                    padding: '0.75rem',
+                    border: '2px solid #e2e8f0',
+                    borderRadius: '8px',
+                    background: 'white',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.5rem',
+                    fontSize: '0.875rem',
+                    fontWeight: 600
+                  }}
+                >
+                  🍎 Apple
+                </button>
+              </div>
+              <div style={{textAlign: 'center', color: '#64748b', fontSize: '0.875rem', marginBottom: '1rem'}}>or</div>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit}>
             {!isLogin && (
               <div style={{marginBottom: '1.5rem'}}>
-                <label style={{display: 'block', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.875rem'}}>Όνομα</label>
+                <label style={{display: 'block', marginBottom: '0.5rem', fontWeight: 600, fontSize: '0.875rem'}}>Name</label>
                 <input
                   type="text"
                   value={name}
