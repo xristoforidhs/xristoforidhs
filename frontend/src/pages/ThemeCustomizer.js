@@ -77,14 +77,7 @@ export default function ThemeCustomizer() {
 
   return (
     <div>
-      <nav className="navbar">
-        <div className="navbar-container">
-          <Link to="/" className="navbar-brand">
-            <Package size={28} />
-            Theme Customizer
-          </Link>
-        </div>
-      </nav>
+      <Navbar />
 
       <div style={{maxWidth: '1200px', margin: '3rem auto', padding: '2rem'}}>
         <Link to="/admin" className="navbar-link" style={{marginBottom: '2rem', display: 'inline-flex'}}>
