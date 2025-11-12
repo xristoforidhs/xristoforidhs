@@ -968,6 +968,28 @@ async def get_customers(current_user: User = Depends(get_current_admin)):
             customer['created_at'] = datetime.fromisoformat(customer['created_at'])
     return customers
 
+# ===== NEWSLETTER ROUTES =====
+
+@api_router.post("/newsletter/subscribe")
+async def subscribe_newsletter(email: EmailStr):
+    """Subscribe to newsletter"""
+    existing = await db.newsletter_subscribers.find_one({"email": email})
+    if existing:
+        return {"message": "Already subscribed"}
+    
+    subscriber = NewsletterSubscriber(email=email)
+    doc = subscriber.model_dump()
+    doc['subscribed_at'] = doc['subscribed_at'].isoformat()
+    await db.newsletter_subscribers.insert_one(doc)
+    
+    return {"message": "Successfully subscribed to newsletter!"}
+
+@api_router.get("/admin/newsletter/subscribers")
+async def get_newsletter_subscribers(current_user: User = Depends(get_current_admin)):
+    """Get all newsletter subscribers (admin only)"""
+    subscribers = await db.newsletter_subscribers.find({}, {"_id": 0}).to_list(10000)
+    return subscribers
+
 # ===== THEME ROUTES =====
 
 @api_router.get("/theme")
