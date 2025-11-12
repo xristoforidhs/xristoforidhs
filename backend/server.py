@@ -125,14 +125,50 @@ class Product(BaseModel):
     name: str
     description: str
     price: float
+    cost_price: float = 0  # CJ cost price
     image_url: str
+    images: List[str] = []  # Multiple images
     category: str
+    subcategory: Optional[str] = None
     stock: int
     featured: bool = False
+    daily_offer: bool = False
+    rating: float = 0
+    review_count: int = 0
     cj_product_id: Optional[str] = None
     cj_variant_id: Optional[str] = None
     supplier: str = "cj_dropshipping"
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class Review(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    product_id: str
+    user_id: Optional[str] = None
+    user_name: str
+    rating: int  # 1-5
+    comment: str
+    verified_purchase: bool = False
+    helpful_count: int = 0
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class ReviewCreate(BaseModel):
+    product_id: str
+    rating: int
+    comment: str
+
+class ThemeSettings(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    id: str = "theme_settings"
+    primary_color: str = "#2563eb"
+    secondary_color: str = "#764ba2"
+    background_color: str = "#f5f7fa"
+    text_color: str = "#1a202c"
+    font_heading: str = "Space Grotesk"
+    font_body: str = "Inter"
+    hero_background: str = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+    button_style: str = "rounded"  # rounded, square, pill
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 class ProductCreate(BaseModel):
     name: str
