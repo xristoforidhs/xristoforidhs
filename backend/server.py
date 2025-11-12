@@ -274,6 +274,7 @@ class StoreSettings(BaseModel):
 
 class StoreSettingsUpdate(BaseModel):
     store_name: Optional[str] = None
+    store_tagline: Optional[str] = None
     store_email: Optional[str] = None
     store_phone: Optional[str] = None
     currency: Optional[str] = None
@@ -282,6 +283,7 @@ class StoreSettingsUpdate(BaseModel):
     free_shipping_threshold: Optional[float] = None
     stripe_publishable_key: Optional[str] = None
     stripe_secret_key: Optional[str] = None
+    profit_markup_percentage: Optional[float] = None
     tiktok_url: Optional[str] = None
     instagram_url: Optional[str] = None
     facebook_url: Optional[str] = None
