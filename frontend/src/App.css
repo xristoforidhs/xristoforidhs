@@ -58,7 +58,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
-  color: #2563eb;
+  color: var(--text-color) !important;
   text-decoration: none;
   display: flex;
   align-items: center;
