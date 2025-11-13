@@ -131,7 +131,7 @@ export default function OrdersPage() {
               fontWeight: 600
             }}
           >
-            🛒 Εγκαταλελειμμένα Καλάθια ({carts.length})
+            🛒 Abandoned Carts ({carts.length})
           </button>
         </div>
 
