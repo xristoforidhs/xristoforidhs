@@ -95,7 +95,7 @@ export default function ProductDetailPage() {
                 disabled={product.stock === 0}
               >
                 <ShoppingCart size={20} />
-                Προσθήκη στο Καλάθι
+                Add to Cart
               </button>
               <button 
                 onClick={() => {
