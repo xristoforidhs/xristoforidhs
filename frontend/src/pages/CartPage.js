@@ -25,7 +25,7 @@ export default function CartPage() {
     const newCart = cart.filter(item => item.id !== productId);
     setCart(newCart);
     localStorage.setItem("cart", JSON.stringify(newCart));
-    toast.success("Αφαιρέθηκε από το καλάθι");
+    toast.success("Removed from cart");
   };
 
   const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
