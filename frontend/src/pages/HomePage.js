@@ -37,7 +37,7 @@ export default function HomePage() {
     }
   };
 
-  const addToCart = (product) => {
+  const addToCart = async (product) => {
     const existing = cart.find(item => item.id === product.id);
     let newCart;
     if (existing) {
@@ -50,6 +50,13 @@ export default function HomePage() {
     setCart(newCart);
     localStorage.setItem("cart", JSON.stringify(newCart));
     toast.success("Προστέθηκε στο καλάθι!");
+
+    // Send notification to admin
+    await sendCartNotification(product, {
+      name: 'Guest User',
+      email: 'guest@example.com',
+      sessionId: Date.now()
+    });
   };
 
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
