@@ -73,7 +73,7 @@ export default function OrdersPage() {
       <Navbar />
 
       <div style={{maxWidth: '1200px', margin: '3rem auto', padding: '2rem'}}>
-        <h1 className="section-title">Διαχείριση Παραγγελιών</h1>
+        <h1 className="section-title">Order Management</h1>
         
         {/* Tabs */}
         <div style={{display: 'flex', gap: '1rem', marginBottom: '2rem', borderBottom: '2px solid #e2e8f0'}}>
