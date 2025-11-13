@@ -24,7 +24,7 @@ export default function OrdersPage() {
       setOrders(response.data);
     } catch (error) {
       console.error("Failed to fetch orders", error);
-      toast.error("Αποτυχία φόρτωσης παραγγελιών");
+      toast.error("Failed to load orders");
     } finally {
       setLoading(false);
     }
