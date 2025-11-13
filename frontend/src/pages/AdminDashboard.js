@@ -149,7 +149,7 @@ export default function AdminDashboard() {
 
       <div style={{maxWidth: '1400px', margin: '3rem auto', padding: '2rem'}}>
         <Link to="/" className="navbar-link" style={{marginBottom: '2rem', display: 'inline-flex'}} data-testid="back-to-shop">
-          <ArrowLeft size={20} /> Επιστροφή στο Κατάστημα
+          <ArrowLeft size={20} /> Back to Store
         </Link>
 
         {/* Admin Actions */}
