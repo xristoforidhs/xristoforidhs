@@ -40,7 +40,7 @@ export default function ProductDetailPage() {
       newCart = [...cart, {...product, quantity: 1}];
     }
     localStorage.setItem("cart", JSON.stringify(newCart));
-    toast.success("Προστέθηκε στο καλάθι!");
+    toast.success("Added to cart!");
   };
 
   if (loading) {
