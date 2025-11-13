@@ -977,26 +977,20 @@ async def calculate_product_price(product_id: str, cost_price: float, current_us
         "profit_percentage": round(((selling_price - cost_price) / cost_price) * 100, 2)
     }
 
-@api_router.post("/products/bulk-calculate-prices")
-async def bulk_calculate_prices(current_user: User = Depends(get_current_admin)):
-    """Recalculate all product prices based on their cost_price and current markup settings"""
-    products = await db.products.find({}, {"_id": 0}).to_list(10000)
-    updated_count = 0
-    
-    for product in products:
-        if product.get('cost_price', 0) > 0:
-            selling_price = await apply_profit_markup(product['cost_price'])
-            await db.products.update_one(
-                {"id": product['id']},
-                {"$set": {"price": selling_price}}
-            )
-            updated_count += 1
-    
-    return {
-        "success": True,
-        "updated_count": updated_count,
-        "message": f"Updated {updated_count} product prices"
-    }
+@api_router.get("/abandoned-carts")
+async def get_abandoned_carts():
+    """Get users who added items to cart but didn't complete order"""
+    # This is a placeholder - in a real app you'd track cart sessions
+    # For now, return empty array
+    return []
+
+@api_router.post("/cart-notification")
+async def send_cart_notification(notification_data: dict):
+    """Send notification when user adds item to cart"""
+    # This would integrate with email/SMS service
+    # For now, just log the notification
+    print(f"🛒 Cart notification: {notification_data}")
+    return {"status": "notification_sent"}
 
 # ===== REVIEWS ROUTES =====
 
