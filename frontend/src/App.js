@@ -3,6 +3,9 @@ import "@/App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
+
+// Import contexts
+import { CartNotificationProvider } from "@/contexts/CartNotificationContext";
 import HomePage from "@/pages/HomePage";
 import ProductDetailPage from "@/pages/ProductDetailPage";
 import CartPage from "@/pages/CartPage";
