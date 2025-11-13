@@ -72,19 +72,6 @@ function App() {
     delete axios.defaults.headers.common["Authorization"];
   };
 
-  const playBackgroundMusic = () => {
-    if (!musicPlaying) {
-      // Create audio element for background music
-      const audio = new Audio('/christmas-music.mp3');
-      audio.loop = true;
-      audio.volume = 0.3;
-      audio.play().catch(error => {
-        console.log('Auto-play prevented:', error);
-      });
-      setMusicPlaying(true);
-    }
-  };
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
