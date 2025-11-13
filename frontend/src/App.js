@@ -106,7 +106,6 @@ function App() {
             </Routes>
           </BrowserRouter>
           <Toaster position="top-center" richColors />
-          <MusicController />
         </div>
       </CartNotificationProvider>
     </AuthContext.Provider>
