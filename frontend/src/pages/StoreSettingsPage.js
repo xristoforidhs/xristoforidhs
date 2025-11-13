@@ -239,9 +239,9 @@ export default function StoreSettingsPage() {
                     <div style={{fontSize: '0.875rem', color: '#64748b', marginTop: '0.75rem', lineHeight: 1.6}}>
                       <p><strong>How it works:</strong> This percentage is added to the cost price to determine the selling price.</p>
                       <p style={{marginTop: '0.5rem'}}>
-                        • <strong>100% markup</strong> = 50% profit margin (Cost $10 → Sell $20)<br/>
-                        • <strong>150% markup</strong> = 60% profit margin (Cost $10 → Sell $25)<br/>
-                        • <strong>200% markup</strong> = 66.7% profit margin (Cost $10 → Sell $30)
+                        • <strong>100% markup</strong> = 50% profit margin (Cost €10 → Sell €20)<br/>
+                        • <strong>150% markup</strong> = 60% profit margin (Cost €10 → Sell €25)<br/>
+                        • <strong>200% markup</strong> = 66.7% profit margin (Cost €10 → Sell €30)
                       </p>
                       <p style={{marginTop: '0.5rem', color: '#2563eb', fontWeight: 600}}>
                         Current setting: {settings?.profit_markup_percentage || 100}% markup = {(((settings?.profit_markup_percentage || 100) / (100 + (settings?.profit_markup_percentage || 100))) * 100).toFixed(1)}% profit margin
