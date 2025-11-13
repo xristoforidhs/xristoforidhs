@@ -62,8 +62,8 @@ export default function CheckoutPage() {
       <h1 style={{fontSize: '2rem', fontWeight: 700, marginBottom: '2rem'}} data-testid="checkout-title">Checkout</h1>
       
       <div style={{background: 'white', borderRadius: '16px', padding: '2rem', boxShadow: '0 4px 12px rgba(0,0,0,0.08)', marginBottom: '2rem'}}>
-        <h2 style={{fontSize: '1.5rem', fontWeight: 600, marginBottom: '1rem'}}>Στοιχεία Χρήστη</h2>
-        <p><strong>Όνομα:</strong> {user?.name}</p>
+        <h2 style={{fontSize: '1.5rem', fontWeight: 600, marginBottom: '1rem'}}>User Details</h2>
+        <p><strong>Name:</strong> {user?.name}</p>
         <p><strong>Email:</strong> {user?.email}</p>
       </div>
 
