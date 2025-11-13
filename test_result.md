@@ -199,23 +199,17 @@ frontend:
         agent: "main"
         comment: "Converted all $ symbols to € in: AdminDashboard.js (product prices, order totals), DailyOffersPage.js, CategoryPage.js, StoreSettingsPage.js (profit markup examples, AdSense earnings). HomePage, ProductDetailPage, ChristmasPage, CartPage, CheckoutPage already had €. Screenshot verified € symbols displaying correctly."
 
-  - task: "Footer with Newsletter signup"
+  - task: "Dark theme consistency check"
     implemented: true
-    working: true
-    file: "/app/frontend/src/components/Footer.js"
+    working: "NA"
+    file: "/app/frontend/src/App.css"
     stuck_count: 0
-    priority: "high"
-    needs_retesting: false
+    priority: "medium"
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
-        comment: "Created comprehensive Footer component with newsletter signup form, quick links, social media links (fetched from settings), and Trustpilot widget placeholder. Integrated into HomePage replacing old footer."
-      - working: false
-        agent: "testing"
-        comment: "❌ ISSUE FOUND: Newsletter subscription failing with 422 error. Frontend sending email in request body but backend expects it as query parameter."
-      - working: true
-        agent: "testing"
-        comment: "✅ FIXED & TESTED: Fixed newsletter API call to send email as query parameter instead of request body. Newsletter subscription now works correctly with success toast notification. Trustpilot widget placeholder visible in footer."
+        comment: "Dark theme with black background already applied in App.css. Screenshot confirmed black background, blue/green accents, and purple prices are displaying correctly. No changes needed."
 
   - task: "Admin Image Upload Tool"
     implemented: true
