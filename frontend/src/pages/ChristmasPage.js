@@ -63,42 +63,6 @@ export default function ChristmasPage() {
         <p style={{fontSize: '1.25rem', opacity: 0.9}}>
           ❄️ Amazing Christmas deals and festive products! ❄️
         </p>
-        
-        {/* Music Controls */}
-        <div style={{marginTop: '2rem', display: 'flex', gap: '1rem', justifyContent: 'center'}}>
-          <button
-            onClick={playChristmasMusic}
-            disabled={musicPlaying}
-            style={{
-              background: musicPlaying ? '#6b7280' : '#22c55e',
-              color: 'white',
-              padding: '0.75rem 1.5rem',
-              border: 'none',
-              borderRadius: '8px',
-              cursor: musicPlaying ? 'not-allowed' : 'pointer',
-              fontWeight: 600
-            }}
-          >
-            🎵 {musicPlaying ? 'Music Playing' : 'Play Christmas Music'}
-          </button>
-          
-          {musicPlaying && (
-            <button
-              onClick={stopMusic}
-              style={{
-                background: '#ef4444',
-                color: 'white',
-                padding: '0.75rem 1.5rem',
-                border: 'none',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontWeight: 600
-              }}
-            >
-              🔇 Stop Music
-            </button>
-          )}
-        </div>
       </div>
 
       {/* Christmas Products */}
