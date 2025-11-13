@@ -202,6 +202,51 @@ export default function MusicController() {
         </button>
       </div>
 
+      {/* Quick Music Options */}
+      <div style={{marginBottom: '1rem'}}>
+        <label style={{fontSize: '0.875rem', color: '#374151', display: 'block', marginBottom: '0.5rem'}}>
+          Quick Select:
+        </label>
+        <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem'}}>
+          <button
+            onClick={() => playMusic({
+              id: 'chill-lofi',
+              name: 'Chill LoFi',
+              type: 'youtube',
+              videoId: 'jfKfPfyJRdk'
+            })}
+            style={{
+              background: '#f3f4f6',
+              border: '1px solid #d1d5db',
+              borderRadius: '4px',
+              padding: '0.5rem',
+              cursor: 'pointer',
+              fontSize: '0.75rem'
+            }}
+          >
+            🎵 Chill LoFi
+          </button>
+          <button
+            onClick={() => playMusic({
+              id: 'christmas-music',
+              name: 'Christmas',
+              type: 'youtube',
+              videoId: 'VbBb0zLJ5wg'
+            })}
+            style={{
+              background: '#f3f4f6',
+              border: '1px solid #d1d5db',
+              borderRadius: '4px',
+              padding: '0.5rem',
+              cursor: 'pointer',
+              fontSize: '0.75rem'
+            }}
+          >
+            🎄 Christmas
+          </button>
+        </div>
+      </div>
+
       {/* Add Form */}
       {showAddForm && (
         <div style={{
