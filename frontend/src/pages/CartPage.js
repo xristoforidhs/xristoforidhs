@@ -72,7 +72,7 @@ export default function CartPage() {
                 <img src={item.image_url} alt={item.name} className="cart-item-image" />
                 <div className="cart-item-info">
                   <h3 style={{fontSize: '1.25rem', fontWeight: 600, marginBottom: '0.5rem'}} data-testid="cart-item-name">{item.name}</h3>
-                  <p style={{color: '#64748b'}} data-testid="cart-item-price">${item.price} × {item.quantity}</p>
+                  <p style={{color: '#64748b'}} data-testid="cart-item-price">€{item.price} × {item.quantity}</p>
                 </div>
                 <div className="quantity-controls">
                   <button 
