@@ -212,29 +212,11 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0.75rem !important;
 }
 
-.product-info {
-  padding: 1.5rem;
-}
-
-.product-name, .product-title {
-  color: var(--text-color) !important;
-  font-size: 0.875rem !important;
-  font-weight: 600 !important;
-  margin-bottom: 0.5rem !important;
-}
-
 .product-description {
   font-size: 0.875rem;
   color: var(--text-secondary) !important;
   margin-bottom: 1rem;
   line-height: 1.5;
-}
-
-.product-price {
-  color: var(--price-color) !important;
-  font-size: 1.125rem !important;
-  font-weight: 700 !important;
-  margin-bottom: 1rem;
 }
 
 /* Buttons */
