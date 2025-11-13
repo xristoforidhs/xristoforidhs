@@ -6,6 +6,7 @@ import { ShoppingCart } from "lucide-react";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useCartNotification } from "@/contexts/CartNotificationContext";
 
 export default function HomePage() {
   const [products, setProducts] = useState([]);
