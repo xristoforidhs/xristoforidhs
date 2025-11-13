@@ -138,9 +138,9 @@ export default function OrdersPage() {
         {/* Content */}
         {activeTab === 'completed' && (
           <div>
-            <h2 style={{marginBottom: '1rem'}}>Ολοκληρωμένες Παραγγελίες</h2>
+            <h2 style={{marginBottom: '1rem'}}>Completed Orders</h2>
             {completedOrders.length === 0 ? (
-              <p>Δεν υπάρχουν ολοκληρωμένες παραγγελίες</p>
+              <p>No completed orders</p>
             ) : (
               completedOrders.map(order => (
                 <div key={order.id} style={{
@@ -152,10 +152,10 @@ export default function OrdersPage() {
                 }}>
                   <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'start'}}>
                     <div>
-                      <h3>Παραγγελία #{order.id}</h3>
-                      <p><strong>Πελάτης:</strong> {order.customer_email}</p>
-                      <p><strong>Συνολικό Κόστος:</strong> €{order.total_amount}</p>
-                      <p><strong>Ημερομηνία:</strong> {new Date(order.created_at).toLocaleDateString()}</p>
+                      <h3>Order #{order.id}</h3>
+                      <p><strong>Customer:</strong> {order.customer_email}</p>
+                      <p><strong>Total Cost:</strong> €{order.total_amount}</p>
+                      <p><strong>Date:</strong> {new Date(order.created_at).toLocaleDateString()}</p>
                     </div>
                     <span style={{
                       background: '#10b981',
@@ -164,7 +164,7 @@ export default function OrdersPage() {
                       borderRadius: '4px',
                       fontSize: '0.875rem'
                     }}>
-                      ✅ Ολοκληρωμένη
+                      ✅ Completed
                     </span>
                   </div>
                 </div>
