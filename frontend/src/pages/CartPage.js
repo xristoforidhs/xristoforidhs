@@ -106,8 +106,8 @@ export default function CartPage() {
 
             <div style={{marginTop: '2rem', background: 'white', borderRadius: '16px', padding: '2rem', boxShadow: '0 4px 12px rgba(0,0,0,0.08)'}}>
               <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem'}}>
-                <h3 style={{fontSize: '1.5rem', fontWeight: 700}}>Σύνολο</h3>
-                <div style={{fontSize: '2rem', fontWeight: 700, color: '#2563eb'}} data-testid="cart-total">${total.toFixed(2)}</div>
+                <h3 style={{fontSize: '1.5rem', fontWeight: 700}}>Total</h3>
+                <div style={{fontSize: '2rem', fontWeight: 700, color: '#2563eb'}} data-testid="cart-total">€{total.toFixed(2)}</div>
               </div>
               <button 
                 onClick={handleCheckout} 
