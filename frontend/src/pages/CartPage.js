@@ -52,7 +52,7 @@ export default function CartPage() {
 
       <div className="cart-section" data-testid="cart-section">
         <Link to="/" className="navbar-link" style={{marginBottom: '2rem', display: 'inline-flex'}} data-testid="back-to-shop">
-          <ArrowLeft size={20} /> Επιστροφή στο κατάστημα
+          <ArrowLeft size={20} /> Back to Shop
         </Link>
         
         <h1 className="section-title">Το Καλάθι μου</h1>
