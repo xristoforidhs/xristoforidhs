@@ -171,7 +171,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .product-description {
   font-size: 0.875rem;
-  color: #64748b;
+  color: var(--text-secondary) !important;
   margin-bottom: 1rem;
   line-height: 1.5;
 }
