@@ -237,9 +237,116 @@ export default function ThemeCustomizer() {
 
             <Card className="mb-4">
               <CardHeader>
-                <CardTitle>Button Style</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <Layout size={20} />
+                  Advanced Layout Settings
+                </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label>Layout Width</Label>
+                  <select
+                    value={theme.layout_width}
+                    onChange={(e) => setTheme({...theme, layout_width: e.target.value})}
+                    style={{width: '100%', padding: '0.5rem', borderRadius: '8px', border: '2px solid #e2e8f0'}}
+                  >
+                    <option value="narrow">Narrow (960px)</option>
+                    <option value="normal">Normal (1200px)</option>
+                    <option value="wide">Wide (1400px)</option>
+                    <option value="full">Full Width</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <Label>Product Card Size</Label>
+                  <select
+                    value={theme.product_card_size}
+                    onChange={(e) => setTheme({...theme, product_card_size: e.target.value})}
+                    style={{width: '100%', padding: '0.5rem', borderRadius: '8px', border: '2px solid #e2e8f0'}}
+                  >
+                    <option value="small">Small Cards</option>
+                    <option value="medium">Medium Cards</option>
+                    <option value="large">Large Cards</option>
+                  </select>
+                </div>
+
+                <div>
+                  <Label>Header Height</Label>
+                  <select
+                    value={theme.header_height}
+                    onChange={(e) => setTheme({...theme, header_height: e.target.value})}
+                    style={{width: '100%', padding: '0.5rem', borderRadius: '8px', border: '2px solid #e2e8f0'}}
+                  >
+                    <option value="compact">Compact (60px)</option>
+                    <option value="normal">Normal (80px)</option>
+                    <option value="large">Large (100px)</option>
+                  </select>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="mb-4">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <ImageIcon size={20} />
+                  Background Image
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label>Upload Background Image</Label>
+                  <div style={{
+                    border: '2px dashed #e2e8f0',
+                    borderRadius: '8px',
+                    padding: '2rem',
+                    textAlign: 'center',
+                    cursor: 'pointer',
+                    background: theme.background_image ? `url(${theme.background_image}) center/cover` : '#f8fafc'
+                  }}>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleBackgroundUpload}
+                      style={{display: 'none'}}
+                      id="background-upload"
+                    />
+                    <label htmlFor="background-upload" style={{cursor: 'pointer'}}>
+                      <Upload size={32} style={{margin: '0 auto 1rem', color: '#64748b'}} />
+                      <p>Click to upload background image</p>
+                      <p style={{fontSize: '0.875rem', color: '#64748b', marginTop: '0.5rem'}}>
+                        Recommended: 1920x1080px, JPG or PNG
+                      </p>
+                    </label>
+                  </div>
+                </div>
+
+                <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                  <input
+                    type="checkbox"
+                    id="show-background"
+                    checked={theme.show_background_image}
+                    onChange={(e) => setTheme({...theme, show_background_image: e.target.checked})}
+                  />
+                  <Label htmlFor="show-background">Show background image</Label>
+                </div>
+
+                {theme.background_image && (
+                  <button
+                    onClick={() => setTheme({...theme, background_image: '', show_background_image: false})}
+                    style={{
+                      background: '#ef4444',
+                      color: 'white',
+                      padding: '0.5rem 1rem',
+                      borderRadius: '6px',
+                      border: 'none',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Remove Background
+                  </button>
+                )}
+              </CardContent>
+            </Card>
                 <div style={{display: 'flex', gap: '1rem'}}>
                   {['rounded', 'square', 'pill'].map(style => (
                     <button
