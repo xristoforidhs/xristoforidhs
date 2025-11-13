@@ -348,8 +348,35 @@ export default function MusicController() {
         <strong>Tips:</strong><br/>
         • YouTube: Copy any video URL<br/>
         • Spotify: Copy playlist/album URLs<br/>
-        • Music plays in background
+        • Music plays in background<br/>
+        • If no sound, try clicking on page first
       </div>
+
+      {/* Test Audio Button */}
+      <button
+        onClick={() => {
+          const audio = new Audio('https://www.soundjay.com/misc/sounds/bell-ringing-05.wav');
+          audio.volume = 0.5;
+          audio.play().then(() => {
+            toast.success("🔔 Test sound played!");
+          }).catch(() => {
+            toast.error("Browser blocked audio. Click somewhere on page first!");
+          });
+        }}
+        style={{
+          width: '100%',
+          padding: '0.5rem',
+          background: '#3b82f6',
+          color: 'white',
+          border: 'none',
+          borderRadius: '6px',
+          cursor: 'pointer',
+          fontSize: '0.75rem',
+          marginTop: '0.5rem'
+        }}
+      >
+        🔔 Test Audio
+      </button>
     </div>
   );
 }
