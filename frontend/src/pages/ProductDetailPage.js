@@ -76,7 +76,7 @@ export default function ProductDetailPage() {
           
           <div>
             <h1 style={{fontSize: '2.5rem', fontWeight: 700, marginBottom: '1rem'}}>{product.name}</h1>
-            <div style={{fontSize: '2rem', fontWeight: 700, color: '#2563eb', marginBottom: '2rem'}}>${product.price}</div>
+            <div style={{fontSize: '2rem', fontWeight: 700, color: '#2563eb', marginBottom: '2rem'}}>€{product.price}</div>
             
             <p style={{fontSize: '1.125rem', lineHeight: 1.7, color: '#475569', marginBottom: '2rem'}}>
               {product.description}
