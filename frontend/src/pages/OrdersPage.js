@@ -250,9 +250,9 @@ export default function OrdersPage() {
 
         {activeTab === 'abandoned' && (
           <div>
-            <h2 style={{marginBottom: '1rem'}}>Εγκαταλελειμμένα Καλάθια</h2>
+            <h2 style={{marginBottom: '1rem'}}>Abandoned Carts</h2>
             {carts.length === 0 ? (
-              <p>Δεν υπάρχουν εγκαταλελειμμένα καλάθια</p>
+              <p>No abandoned carts found</p>
             ) : (
               carts.map(cart => (
                 <div key={cart.id} style={{
