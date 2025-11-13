@@ -83,8 +83,8 @@ export default function ProductDetailPage() {
             </p>
 
             <div style={{marginBottom: '2rem'}}>
-              <p><strong>Κατηγορία:</strong> {product.category}</p>
-              <p><strong>Διαθεσιμότητα:</strong> {product.stock > 0 ? `${product.stock} σε απόθεμα` : 'Εξαντλημένο'}</p>
+              <p><strong>Category:</strong> {product.category}</p>
+              <p><strong>Availability:</strong> {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}</p>
             </div>
 
             <div style={{display: 'flex', gap: '1rem'}}>
