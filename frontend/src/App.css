@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
+/* Dark Professional Theme */
+:root {
+  --primary-color: #3b82f6; /* Blue */
+  --secondary-color: #10b981; /* Green */
+  --background-color: #000000; /* Black */
+  --card-background: #1a1a1a; /* Dark gray */
+  --text-color: #ffffff; /* White */
+  --text-secondary: #d1d5db; /* Light gray */
+  --border-color: #374151; /* Dark border */
+  --price-color: #8b5cf6; /* Purple */
+  --button-cart: #3b82f6; /* Blue */
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -8,8 +21,8 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
-  color: #1a202c;
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
   min-height: 100vh;
 }
 
