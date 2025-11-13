@@ -103,7 +103,7 @@ export default function OrdersPage() {
               fontWeight: 600
             }}
           >
-            ⏳ Εκκρεμείς ({pendingOrders.length})
+            ⏳ Pending ({pendingOrders.length})
           </button>
           <button
             onClick={() => setActiveTab('shipped')}
