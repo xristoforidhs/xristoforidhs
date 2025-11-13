@@ -36,7 +36,6 @@ function App() {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [loading, setLoading] = useState(true);
-  const [musicPlaying, setMusicPlaying] = useState(false);
 
   useEffect(() => {
     if (token) {
