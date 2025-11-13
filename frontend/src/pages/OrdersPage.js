@@ -7,7 +7,9 @@ import Navbar from "@/components/Navbar";
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState([]);
+  const [carts, setCarts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState('completed');
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
