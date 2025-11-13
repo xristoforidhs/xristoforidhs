@@ -62,7 +62,7 @@ export default function ProductDetailPage() {
 
       <div style={{maxWidth: '1200px', margin: '3rem auto', padding: '2rem'}}>
         <Link to="/" className="navbar-link" style={{marginBottom: '2rem', display: 'inline-flex'}}>
-          <ArrowLeft size={20} /> Επιστροφή
+          <ArrowLeft size={20} /> Back
         </Link>
 
         <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', marginTop: '2rem'}}>
