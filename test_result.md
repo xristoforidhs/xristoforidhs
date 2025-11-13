@@ -187,20 +187,17 @@ frontend:
         agent: "main"
         comment: "Translated all Greek text to English in: AdminDashboard.js (form labels, toasts, status texts), AuthPage.js (success messages), OrdersPage.js (tabs, headings, status labels), PaymentSuccessPage.js (all messages), App.js (loading text). Screenshot verified English navigation visible."
 
-  - task: "Reviews Page"
+  - task: "Currency conversion from $ to €"
     implemented: true
-    working: true
-    file: "/app/frontend/src/pages/ReviewsPage.js"
+    working: "NA"
+    file: "Multiple files"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
-        comment: "ReviewsPage.js already fully implemented. Shows all products with reviews, displays ratings and review counts. Added route /reviews to App.js."
-      - working: true
-        agent: "testing"
-        comment: "✅ TESTED: Reviews page accessible at /reviews. Successfully displays 101 products with reviews, shows star ratings and review counts. Navigation from homepage works correctly. Page title 'Customer Reviews' displays properly."
+        comment: "Converted all $ symbols to € in: AdminDashboard.js (product prices, order totals), DailyOffersPage.js, CategoryPage.js, StoreSettingsPage.js (profit markup examples, AdSense earnings). HomePage, ProductDetailPage, ChristmasPage, CartPage, CheckoutPage already had €. Screenshot verified € symbols displaying correctly."
 
   - task: "Footer with Newsletter signup"
     implemented: true
