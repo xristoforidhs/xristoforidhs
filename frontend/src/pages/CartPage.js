@@ -55,7 +55,7 @@ export default function CartPage() {
           <ArrowLeft size={20} /> Back to Shop
         </Link>
         
-        <h1 className="section-title">Το Καλάθι μου</h1>
+        <h1 className="section-title">My Cart</h1>
 
         {cart.length === 0 ? (
           <div className="cart-empty" data-testid="cart-empty">
