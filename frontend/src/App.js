@@ -31,6 +31,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [loading, setLoading] = useState(true);
+  const [musicPlaying, setMusicPlaying] = useState(false);
 
   useEffect(() => {
     if (token) {
@@ -39,6 +40,10 @@ function App() {
     } else {
       setLoading(false);
     }
+    // Auto-start background music after 3 seconds
+    setTimeout(() => {
+      playBackgroundMusic();
+    }, 3000);
   }, [token]);
 
   const fetchUser = async () => {
