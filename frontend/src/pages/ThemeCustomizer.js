@@ -26,6 +26,7 @@ export default function ThemeCustomizer() {
     background_image: '',
     show_background_image: false
   });
+  const [backgroundFile, setBackgroundFile] = useState(null);
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
