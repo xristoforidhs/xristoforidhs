@@ -14,6 +14,7 @@ export default function OrdersPage() {
 
   useEffect(() => {
     fetchOrders();
+    fetchAbandonedCarts();
   }, []);
 
   const fetchOrders = async () => {
@@ -25,6 +26,16 @@ export default function OrdersPage() {
       toast.error("Αποτυχία φόρτωσης παραγγελιών");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchAbandonedCarts = async () => {
+    try {
+      // Fetch users who added items to cart but didn't complete order
+      const response = await axios.get(`${API}/abandoned-carts`);
+      setCarts(response.data);
+    } catch (error) {
+      console.error("Failed to fetch abandoned carts", error);
     }
   };
 
