@@ -53,8 +53,8 @@ export default function PaymentSuccessPage() {
         {status === "checking" && (
           <>
             <Loader2 className="animate-spin" size={64} style={{margin: '0 auto', color: '#2563eb'}} />
-            <h1 style={{fontSize: '2rem', fontWeight: 700, marginTop: '2rem'}}>Επαλήθευση Πληρωμής...</h1>
-            <p style={{color: '#64748b', marginTop: '1rem'}}>Παρακαλώ περιμένετε</p>
+            <h1 style={{fontSize: '2rem', fontWeight: 700, marginTop: '2rem'}}>Verifying Payment...</h1>
+            <p style={{color: '#64748b', marginTop: '1rem'}}>Please wait</p>
           </>
         )}
 
