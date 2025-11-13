@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { API } from "@/App";
-import { ArrowLeft, Palette, Save } from "lucide-react";
+import { ArrowLeft, Palette, Save, Upload, Image as ImageIcon, Type, Layout } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
