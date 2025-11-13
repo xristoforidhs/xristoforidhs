@@ -36,9 +36,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Navbar */
 .navbar {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  background: var(--background-color) !important;
+  border-bottom: 2px solid var(--border-color) !important;
   padding: 1rem 0;
   position: sticky;
   top: 0;
