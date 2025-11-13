@@ -132,7 +132,7 @@ export default function AdminDashboard() {
       fetchOrders();
     } catch (error) {
       console.error("Failed to update order status", error);
-      toast.error("Αποτυχία ενημέρωσης");
+      toast.error("Update failed");
     }
   };
 
