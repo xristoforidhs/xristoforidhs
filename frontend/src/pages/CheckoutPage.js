@@ -17,7 +17,7 @@ export default function CheckoutPage() {
       navigate("/auth");
     }
     if (cart.length === 0) {
-      toast.error("Το καλάθι είναι άδειο");
+      toast.error("Cart is empty");
       navigate("/cart");
     }
   }, [user, cart, navigate]);
