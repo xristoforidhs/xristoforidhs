@@ -14,6 +14,7 @@ export default function HomePage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const navigate = useNavigate();
+  const { sendCartNotification } = useCartNotification();
   const productsPerPage = 24;
 
   useEffect(() => {
