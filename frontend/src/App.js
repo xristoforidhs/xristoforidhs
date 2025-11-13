@@ -118,6 +118,7 @@ function App() {
               <Route path="/admin/customers" element={user?.role === "admin" ? <CustomersPage /> : <Navigate to="/" />} />
               <Route path="/admin/theme" element={user?.role === "admin" ? <ThemeCustomizer /> : <Navigate to="/" />} />
               <Route path="/admin/images" element={user?.role === "admin" ? <ImageUploadPage /> : <Navigate to="/" />} />
+              <Route path="/admin/add-products" element={user?.role === "admin" ? <ProductSearchPage /> : <Navigate to="/" />} />
               <Route path="/reviews" element={<ReviewsPage />} />
               <Route path="/christmas" element={<ChristmasPage />} />
             </Routes>
