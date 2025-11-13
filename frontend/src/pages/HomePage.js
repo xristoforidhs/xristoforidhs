@@ -88,6 +88,64 @@ export default function HomePage() {
             </div>
           ))}
         </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', margin: '3rem 0'}}>
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              style={{
+                padding: '0.75rem 1rem',
+                background: currentPage === 1 ? '#e2e8f0' : '#3b82f6',
+                color: currentPage === 1 ? '#94a3b8' : 'white',
+                border: 'none',
+                borderRadius: '6px',
+                cursor: currentPage === 1 ? 'not-allowed' : 'pointer'
+              }}
+            >
+              Previous
+            </button>
+            
+            <div style={{display: 'flex', gap: '0.5rem'}}>
+              {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                const pageNum = i + 1;
+                return (
+                  <button
+                    key={pageNum}
+                    onClick={() => setCurrentPage(pageNum)}
+                    style={{
+                      padding: '0.75rem 1rem',
+                      background: currentPage === pageNum ? '#3b82f6' : 'white',
+                      color: currentPage === pageNum ? 'white' : '#374151',
+                      border: '2px solid #e2e8f0',
+                      borderRadius: '6px',
+                      cursor: 'pointer',
+                      minWidth: '3rem'
+                    }}
+                  >
+                    {pageNum}
+                  </button>
+                );
+              })}
+            </div>
+            
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+              style={{
+                padding: '0.75rem 1rem',
+                background: currentPage === totalPages ? '#e2e8f0' : '#3b82f6',
+                color: currentPage === totalPages ? '#94a3b8' : 'white',
+                border: 'none',
+                borderRadius: '6px',
+                cursor: currentPage === totalPages ? 'not-allowed' : 'pointer'
+              }}
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
 
       <Footer />
