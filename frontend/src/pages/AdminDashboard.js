@@ -88,7 +88,7 @@ export default function AdminDashboard() {
 
       if (editingProduct) {
         await axios.put(`${API}/products/${editingProduct.id}`, payload);
-        toast.success("Το προϊόν ενημερώθηκε");
+        toast.success("Product updated");
       } else {
         await axios.post(`${API}/products`, payload);
         toast.success("Το προϊόν δημιουργήθηκε");
