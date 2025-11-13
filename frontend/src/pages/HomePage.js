@@ -83,7 +83,7 @@ export default function HomePage() {
               <div className="product-info">
                 <h3 className="product-name" data-testid="product-name">{product.name}</h3>
                 <p className="product-description">{product.description.substring(0, 80)}...</p>
-                <div className="product-price" data-testid="product-price">${product.price}</div>
+                <div className="product-price" data-testid="product-price">€{product.price}</div>
                 <button 
                   onClick={() => addToCart(product)} 
                   className="btn btn-primary"
