@@ -60,9 +60,9 @@ export default function CartPage() {
         {cart.length === 0 ? (
           <div className="cart-empty" data-testid="cart-empty">
             <ShoppingCart size={64} style={{margin: '0 auto', color: '#cbd5e1'}} />
-            <h2 style={{marginTop: '1rem', marginBottom: '1rem'}}>Το καλάθι σας είναι άδειο</h2>
+            <h2 style={{marginTop: '1rem', marginBottom: '1rem'}}>Your cart is empty</h2>
             <Link to="/" className="btn btn-primary" data-testid="continue-shopping">
-              Συνέχεια Αγορών
+              Continue Shopping
             </Link>
           </div>
         ) : (
