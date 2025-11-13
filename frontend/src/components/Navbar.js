@@ -20,7 +20,7 @@ export default function Navbar({ cartCount = 0 }) {
           <Link to="/christmas" className="navbar-link" style={{color: '#dc2626', fontWeight: 600}}>🎄 Christmas</Link>
           <Link to="/daily-offers" className="navbar-link" style={{color: '#f59e0b', fontWeight: 600}}>Daily Offers</Link>
           <Link to="/reviews" className="navbar-link">Reviews</Link>
-          <Link to="/social" className="navbar-link">Socials</Link>
+          <Link to="/social" className="navbar-link">Social</Link>
           <Link to="/cart" className="navbar-link" data-testid="cart-link">
             <ShoppingCart size={20} />
             Cart {cartCount > 0 && <span className="cart-badge" data-testid="cart-count">{cartCount}</span>}
