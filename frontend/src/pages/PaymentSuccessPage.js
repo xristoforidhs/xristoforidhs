@@ -25,7 +25,7 @@ export default function PaymentSuccessPage() {
     const maxAttempts = 5;
     if (attempts >= maxAttempts) {
       setStatus("error");
-      toast.error("Δεν μπορέσαμε να επαληθεύσουμε την πληρωμή");
+      toast.error("Could not verify payment");
       return;
     }
 
