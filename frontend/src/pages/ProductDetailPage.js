@@ -122,6 +122,50 @@ export default function ProductDetailPage() {
             </div>
           </div>
         </div>
+
+        {/* Reviews Section */}
+        {reviews.length > 0 && (
+          <div style={{marginTop: '4rem'}}>
+            <div style={{display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem'}}>
+              <Star size={32} style={{color: '#f59e0b'}} />
+              <h2 style={{fontSize: '2rem', fontWeight: 700}}>Customer Reviews</h2>
+              <span style={{fontSize: '1.25rem', color: '#64748b'}}>({reviews.length} reviews)</span>
+            </div>
+
+            <div style={{display: 'flex', flexDirection: 'column', gap: '1.5rem'}}>
+              {reviews.map(review => (
+                <div 
+                  key={review.id}
+                  style={{
+                    background: 'white',
+                    padding: '1.5rem',
+                    borderRadius: '12px',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+                    border: '1px solid #e2e8f0'
+                  }}
+                >
+                  <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1rem'}}>
+                    <div>
+                      <div style={{fontWeight: 600, fontSize: '1.125rem', marginBottom: '0.25rem'}}>
+                        {review.user_name}
+                      </div>
+                      <div style={{color: '#f59e0b', fontSize: '1.125rem'}}>
+                        {'★'.repeat(review.rating)}
+                        {'☆'.repeat(5 - review.rating)}
+                      </div>
+                    </div>
+                    <div style={{fontSize: '0.875rem', color: '#64748b'}}>
+                      {new Date(review.created_at).toLocaleDateString()}
+                    </div>
+                  </div>
+                  <p style={{fontSize: '1rem', lineHeight: 1.6, color: '#475569'}}>
+                    {review.comment}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
