@@ -106,7 +106,7 @@ export default function ProductDetailPage() {
                 style={{flex: 1, fontSize: '1.125rem', padding: '1rem'}}
                 disabled={product.stock === 0}
               >
-                Αγορά Τώρα
+                Buy Now
               </button>
             </div>
           </div>
