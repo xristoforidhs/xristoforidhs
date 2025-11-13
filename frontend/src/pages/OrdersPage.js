@@ -1,9 +1,9 @@
 import { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import { API, AuthContext } from "@/App";
-import { Package, ArrowLeft } from "lucide-react";
+import { Package } from "lucide-react";
 import { toast } from "sonner";
+import Navbar from "@/components/Navbar";
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState([]);
