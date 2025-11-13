@@ -365,7 +365,7 @@ export default function AdminDashboard() {
                 </div>
 
                 <div style={{display: 'flex', gap: '1rem', alignItems: 'center'}}>
-                  <label style={{fontWeight: 600, fontSize: '0.875rem'}}>Κατάσταση:</label>
+                  <label style={{fontWeight: 600, fontSize: '0.875rem'}}>Status:</label>
                   <select
                     value={order.status}
                     onChange={(e) => updateOrderStatus(order.id, e.target.value)}
@@ -378,10 +378,10 @@ export default function AdminDashboard() {
                     }}
                     data-testid={`order-status-select-${order.id}`}
                   >
-                    <option value="pending">Εκκρεμής</option>
-                    <option value="processing">Σε Επεξεργασία</option>
-                    <option value="completed">Ολοκληρωμένη</option>
-                    <option value="cancelled">Ακυρωμένη</option>
+                    <option value="pending">Pending</option>
+                    <option value="processing">Processing</option>
+                    <option value="completed">Completed</option>
+                    <option value="cancelled">Cancelled</option>
                   </select>
                   <span style={{
                     padding: '0.5rem 1rem',
@@ -391,7 +391,7 @@ export default function AdminDashboard() {
                     background: order.payment_status === 'paid' ? '#22c55e20' : '#f59e0b20',
                     color: order.payment_status === 'paid' ? '#22c55e' : '#f59e0b'
                   }}>
-                    {order.payment_status === 'paid' ? 'Πληρωμένη' : 'Εκκρεμής'}
+                    {order.payment_status === 'paid' ? 'Paid' : 'Pending'}
                   </span>
                 </div>
               </div>
