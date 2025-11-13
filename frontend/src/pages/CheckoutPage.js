@@ -59,7 +59,7 @@ export default function CheckoutPage() {
 
   return (
     <div style={{maxWidth: '800px', margin: '4rem auto', padding: '2rem'}}>
-      <h1 style={{fontSize: '2rem', fontWeight: 700, marginBottom: '2rem'}} data-testid="checkout-title">Ολοκλήρωση Παραγγελίας</h1>
+      <h1 style={{fontSize: '2rem', fontWeight: 700, marginBottom: '2rem'}} data-testid="checkout-title">Checkout</h1>
       
       <div style={{background: 'white', borderRadius: '16px', padding: '2rem', boxShadow: '0 4px 12px rgba(0,0,0,0.08)', marginBottom: '2rem'}}>
         <h2 style={{fontSize: '1.5rem', fontWeight: 600, marginBottom: '1rem'}}>Στοιχεία Χρήστη</h2>
