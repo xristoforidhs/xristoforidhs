@@ -60,6 +60,10 @@ export default function OrdersPage() {
     return labels[status] || status;
   };
 
+  const completedOrders = orders.filter(order => order.status === 'completed');
+  const pendingOrders = orders.filter(order => order.status === 'pending');
+  const shippedOrders = orders.filter(order => order.tracking_number);
+
   if (loading) {
     return <div style={{minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Φόρτωση...</div>;
   }
@@ -69,89 +73,216 @@ export default function OrdersPage() {
       <Navbar />
 
       <div style={{maxWidth: '1200px', margin: '3rem auto', padding: '2rem'}}>
-        <h1 className="section-title">Οι Παραγγελίες μου</h1>
+        <h1 className="section-title">Διαχείριση Παραγγελιών</h1>
+        
+        {/* Tabs */}
+        <div style={{display: 'flex', gap: '1rem', marginBottom: '2rem', borderBottom: '2px solid #e2e8f0'}}>
+          <button
+            onClick={() => setActiveTab('completed')}
+            style={{
+              padding: '0.75rem 1.5rem',
+              background: activeTab === 'completed' ? '#3b82f6' : 'transparent',
+              color: activeTab === 'completed' ? 'white' : '#374151',
+              border: 'none',
+              borderRadius: '8px 8px 0 0',
+              cursor: 'pointer',
+              fontWeight: 600
+            }}
+          >
+            ✅ Ολοκληρωμένες ({completedOrders.length})
+          </button>
+          <button
+            onClick={() => setActiveTab('pending')}
+            style={{
+              padding: '0.75rem 1.5rem',
+              background: activeTab === 'pending' ? '#f59e0b' : 'transparent',
+              color: activeTab === 'pending' ? 'white' : '#374151',
+              border: 'none',
+              borderRadius: '8px 8px 0 0',
+              cursor: 'pointer',
+              fontWeight: 600
+            }}
+          >
+            ⏳ Εκκρεμείς ({pendingOrders.length})
+          </button>
+          <button
+            onClick={() => setActiveTab('shipped')}
+            style={{
+              padding: '0.75rem 1.5rem',
+              background: activeTab === 'shipped' ? '#10b981' : 'transparent',
+              color: activeTab === 'shipped' ? 'white' : '#374151',
+              border: 'none',
+              borderRadius: '8px 8px 0 0',
+              cursor: 'pointer',
+              fontWeight: 600
+            }}
+          >
+            🚚 Με Tracking ({shippedOrders.length})
+          </button>
+          <button
+            onClick={() => setActiveTab('abandoned')}
+            style={{
+              padding: '0.75rem 1.5rem',
+              background: activeTab === 'abandoned' ? '#ef4444' : 'transparent',
+              color: activeTab === 'abandoned' ? 'white' : '#374151',
+              border: 'none',
+              borderRadius: '8px 8px 0 0',
+              cursor: 'pointer',
+              fontWeight: 600
+            }}
+          >
+            🛒 Εγκαταλελειμμένα Καλάθια ({carts.length})
+          </button>
+        </div>
 
-        {orders.length === 0 ? (
-          <div style={{textAlign: 'center', padding: '4rem 2rem'}}>
-            <Package size={64} style={{margin: '0 auto', color: '#cbd5e1'}} />
-            <h2 style={{marginTop: '1rem', marginBottom: '1rem'}}>Δεν έχετε παραγγελίες ακόμα</h2>
-            <Link to="/" className="btn btn-primary">
-              Ξεκινήστε την αγορά
-            </Link>
-          </div>
-        ) : (
+        {/* Content */}
+        {activeTab === 'completed' && (
           <div>
-            {orders.map(order => (
-              <div 
-                key={order.id} 
-                style={{
-                  background: 'white', 
-                  borderRadius: '16px', 
-                  padding: '2rem', 
-                  marginBottom: '1.5rem',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
-                }}
-                data-testid={`order-${order.id}`}
-              >
-                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '1.5rem'}}>
-                  <div>
-                    <h3 style={{fontSize: '1.25rem', fontWeight: 600, marginBottom: '0.5rem'}}>
-                      Παραγγελία #{order.id.substring(0, 8)}
-                    </h3>
-                    <p style={{color: '#64748b', fontSize: '0.875rem'}}>
-                      {new Date(order.created_at).toLocaleDateString('el-GR', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                      })}
-                    </p>
-                  </div>
-                  <div>
-                    <span 
-                      style={{
-                        padding: '0.5rem 1rem',
-                        borderRadius: '999px',
-                        fontSize: '0.875rem',
-                        fontWeight: 600,
-                        background: `${getStatusColor(order.status)}20`,
-                        color: getStatusColor(order.status)
-                      }}
-                      data-testid="order-status"
-                    >
-                      {getStatusLabel(order.status)}
+            <h2 style={{marginBottom: '1rem'}}>Ολοκληρωμένες Παραγγελίες</h2>
+            {completedOrders.length === 0 ? (
+              <p>Δεν υπάρχουν ολοκληρωμένες παραγγελίες</p>
+            ) : (
+              completedOrders.map(order => (
+                <div key={order.id} style={{
+                  background: 'white',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '8px',
+                  padding: '1.5rem',
+                  marginBottom: '1rem'
+                }}>
+                  <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'start'}}>
+                    <div>
+                      <h3>Παραγγελία #{order.id}</h3>
+                      <p><strong>Πελάτης:</strong> {order.customer_email}</p>
+                      <p><strong>Συνολικό Κόστος:</strong> €{order.total_amount}</p>
+                      <p><strong>Ημερομηνία:</strong> {new Date(order.created_at).toLocaleDateString()}</p>
+                    </div>
+                    <span style={{
+                      background: '#10b981',
+                      color: 'white',
+                      padding: '0.25rem 0.75rem',
+                      borderRadius: '4px',
+                      fontSize: '0.875rem'
+                    }}>
+                      ✅ Ολοκληρωμένη
                     </span>
                   </div>
                 </div>
+              ))
+            )}
+          </div>
+        )}
 
-                <div style={{marginBottom: '1.5rem'}}>
-                  {order.items.map((item, idx) => (
-                    <div key={idx} style={{display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem'}}>
-                      <span>{item.name} × {item.quantity}</span>
-                      <span style={{fontWeight: 600}}>${(item.price * item.quantity).toFixed(2)}</span>
+        {activeTab === 'pending' && (
+          <div>
+            <h2 style={{marginBottom: '1rem'}}>Εκκρεμείς Παραγγελίες</h2>
+            {pendingOrders.length === 0 ? (
+              <p>Δεν υπάρχουν εκκρεμείς παραγγελίες</p>
+            ) : (
+              pendingOrders.map(order => (
+                <div key={order.id} style={{
+                  background: 'white',
+                  border: '1px solid #f59e0b',
+                  borderRadius: '8px',
+                  padding: '1.5rem',
+                  marginBottom: '1rem'
+                }}>
+                  <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'start'}}>
+                    <div>
+                      <h3>Παραγγελία #{order.id}</h3>
+                      <p><strong>Πελάτης:</strong> {order.customer_email}</p>
+                      <p><strong>Συνολικό Κόστος:</strong> €{order.total_amount}</p>
+                      <p><strong>Ημερομηνία:</strong> {new Date(order.created_at).toLocaleDateString()}</p>
                     </div>
-                  ))}
-                </div>
-
-                <hr style={{margin: '1.5rem 0'}} />
-
-                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                  <div>
-                    <p style={{color: '#64748b', fontSize: '0.875rem'}}>Κατάσταση Πληρωμής:</p>
-                    <p style={{fontWeight: 600, color: order.payment_status === 'paid' ? '#22c55e' : '#f59e0b'}}>
-                      {order.payment_status === 'paid' ? 'Πληρωμένη' : 'Εκκρεμής'}
-                    </p>
-                  </div>
-                  <div style={{textAlign: 'right'}}>
-                    <p style={{color: '#64748b', fontSize: '0.875rem'}}>Σύνολο</p>
-                    <p style={{fontSize: '1.75rem', fontWeight: 700, color: '#2563eb'}} data-testid="order-total">
-                      ${order.total_amount.toFixed(2)}
-                    </p>
+                    <span style={{
+                      background: '#f59e0b',
+                      color: 'white',
+                      padding: '0.25rem 0.75rem',
+                      borderRadius: '4px',
+                      fontSize: '0.875rem'
+                    }}>
+                      ⏳ Εκκρεμής
+                    </span>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
+          </div>
+        )}
+
+        {activeTab === 'shipped' && (
+          <div>
+            <h2 style={{marginBottom: '1rem'}}>Παραγγελίες με Tracking Number</h2>
+            {shippedOrders.length === 0 ? (
+              <p>Δεν υπάρχουν παραγγελίες με tracking number</p>
+            ) : (
+              shippedOrders.map(order => (
+                <div key={order.id} style={{
+                  background: 'white',
+                  border: '1px solid #10b981',
+                  borderRadius: '8px',
+                  padding: '1.5rem',
+                  marginBottom: '1rem'
+                }}>
+                  <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'start'}}>
+                    <div>
+                      <h3>Παραγγελία #{order.id}</h3>
+                      <p><strong>Πελάτης:</strong> {order.customer_email}</p>
+                      <p><strong>Tracking Number:</strong> {order.tracking_number}</p>
+                      <p><strong>Συνολικό Κόστος:</strong> €{order.total_amount}</p>
+                      <p><strong>Ημερομηνία:</strong> {new Date(order.created_at).toLocaleDateString()}</p>
+                    </div>
+                    <span style={{
+                      background: '#10b981',
+                      color: 'white',
+                      padding: '0.25rem 0.75rem',
+                      borderRadius: '4px',
+                      fontSize: '0.875rem'
+                    }}>
+                      🚚 Στάλθηκε
+                    </span>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        )}
+
+        {activeTab === 'abandoned' && (
+          <div>
+            <h2 style={{marginBottom: '1rem'}}>Εγκαταλελειμμένα Καλάθια</h2>
+            {carts.length === 0 ? (
+              <p>Δεν υπάρχουν εγκαταλελειμμένα καλάθια</p>
+            ) : (
+              carts.map(cart => (
+                <div key={cart.id} style={{
+                  background: 'white',
+                  border: '1px solid #ef4444',
+                  borderRadius: '8px',
+                  padding: '1.5rem',
+                  marginBottom: '1rem'
+                }}>
+                  <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'start'}}>
+                    <div>
+                      <h3>Καλάθι #{cart.id}</h3>
+                      <p><strong>Πελάτης:</strong> {cart.customer_email}</p>
+                      <p><strong>Προϊόντα στο καλάθι:</strong> {cart.items_count}</p>
+                      <p><strong>Αξία καλαθιού:</strong> €{cart.total_value}</p>
+                      <p><strong>Τελευταία ενεργότητα:</strong> {new Date(cart.updated_at).toLocaleDateString()}</p>
+                    </div>
+                    <span style={{
+                      background: '#ef4444',
+                      color: 'white',
+                      padding: '0.25rem 0.75rem',
+                      borderRadius: '4px',
+                      fontSize: '0.875rem'
+                    }}>
+                      🛒 Εγκαταλελειμμένο
+                    </span>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         )}
       </div>
