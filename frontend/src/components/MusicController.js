@@ -94,38 +94,43 @@ export default function MusicController() {
     stopMusic(); // Stop current music
     
     if (song.type === 'spotify') {
-      // Open Spotify in new tab (Spotify doesn't allow embedding)
-      window.open(song.url, '_blank');
-      toast.info("Spotify opened in new tab!");
-      setCurrentSong(song);
-      setIsPlaying(true);
-    } else {
-      // YouTube embed - make it small but visible so audio works
+      // Spotify embed in same window
       const iframe = document.createElement('iframe');
       iframe.id = 'music-player';
-      iframe.width = '1';
-      iframe.height = '1';
-      iframe.src = `https://www.youtube.com/embed/${song.videoId}?autoplay=1&loop=1&playlist=${song.videoId}&controls=0&mute=0`;
+      iframe.width = '300';
+      iframe.height = '152';
+      iframe.src = `https://open.spotify.com/embed/${song.spotifyType}/${song.spotifyId}?utm_source=generator&theme=0`;
       iframe.style.position = 'fixed';
-      iframe.style.bottom = '0px';
-      iframe.style.left = '0px';
-      iframe.style.opacity = '0.01';
-      iframe.style.pointerEvents = 'none';
-      iframe.allow = 'autoplay; encrypted-media';
+      iframe.style.bottom = '20px';
+      iframe.style.left = '20px';
+      iframe.style.zIndex = '999';
+      iframe.style.borderRadius = '12px';
+      iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
+      iframe.loading = 'lazy';
       document.body.appendChild(iframe);
       
       setCurrentSong(song);
       setIsPlaying(true);
+      toast.success("🎵 Spotify player loaded!");
+    } else {
+      // YouTube embed - simple and working approach
+      const iframe = document.createElement('iframe');
+      iframe.id = 'music-player';
+      iframe.width = '300';
+      iframe.height = '169';
+      iframe.src = `https://www.youtube.com/embed/${song.videoId}?autoplay=1&loop=1&playlist=${song.videoId}`;
+      iframe.style.position = 'fixed';
+      iframe.style.bottom = '20px';
+      iframe.style.left = '20px';
+      iframe.style.zIndex = '999';
+      iframe.style.borderRadius = '12px';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      document.body.appendChild(iframe);
       
-      // Try to ensure audio plays
-      setTimeout(() => {
-        try {
-          iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-        } catch (e) {
-          console.log('Could not control iframe');
-        }
-        toast.success("🎵 Music should be playing now!");
-      }, 2000);
+      setCurrentSong(song);
+      setIsPlaying(true);
+      toast.success("🎵 YouTube music loaded!");
     }
   };
 
