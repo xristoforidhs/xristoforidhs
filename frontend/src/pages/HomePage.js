@@ -49,7 +49,7 @@ export default function HomePage() {
     }
     setCart(newCart);
     localStorage.setItem("cart", JSON.stringify(newCart));
-    toast.success("Προστέθηκε στο καλάθι!");
+    toast.success("Added to cart!");
 
     // Send notification to admin
     await sendCartNotification(product, {
