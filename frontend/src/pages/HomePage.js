@@ -19,10 +19,16 @@ export default function HomePage() {
     fetchProducts();
   }, []);
 
-  const fetchProducts = async () => {
+  const fetchProducts = async (page = 1) => {
     try {
-      const response = await axios.get(`${API}/products?limit=200`);
+      const skip = (page - 1) * productsPerPage;
+      const response = await axios.get(`${API}/products?limit=${productsPerPage}&skip=${skip}`);
       setProducts(response.data);
+      
+      // Get total count for pagination
+      const countResponse = await axios.get(`${API}/products/count`);
+      const totalProducts = countResponse.data.count;
+      setTotalPages(Math.ceil(totalProducts / productsPerPage));
     } catch (error) {
       console.error("Failed to fetch products", error);
       toast.error("Failed to load products");
