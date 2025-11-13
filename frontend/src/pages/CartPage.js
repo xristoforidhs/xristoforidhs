@@ -32,7 +32,7 @@ export default function CartPage() {
 
   const handleCheckout = () => {
     if (!user) {
-      toast.error("Παρακαλώ συνδεθείτε για να ολοκληρώσετε την παραγγελία");
+      toast.error("Please log in to complete your order");
       navigate("/auth");
       return;
     }
