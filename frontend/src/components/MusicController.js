@@ -83,19 +83,32 @@ export default function MusicController() {
       setCurrentSong(song);
       setIsPlaying(true);
     } else {
-      // YouTube embed
+      // YouTube embed - make it small but visible so audio works
       const iframe = document.createElement('iframe');
       iframe.id = 'music-player';
-      iframe.width = '0';
-      iframe.height = '0';
-      iframe.src = `https://www.youtube.com/embed/${song.videoId}?autoplay=1&loop=1&playlist=${song.videoId}&controls=0`;
-      iframe.style.display = 'none';
+      iframe.width = '1';
+      iframe.height = '1';
+      iframe.src = `https://www.youtube.com/embed/${song.videoId}?autoplay=1&loop=1&playlist=${song.videoId}&controls=0&mute=0`;
+      iframe.style.position = 'fixed';
+      iframe.style.bottom = '0px';
+      iframe.style.left = '0px';
+      iframe.style.opacity = '0.01';
+      iframe.style.pointerEvents = 'none';
       iframe.allow = 'autoplay; encrypted-media';
       document.body.appendChild(iframe);
       
       setCurrentSong(song);
       setIsPlaying(true);
-      toast.success("🎵 Music started!");
+      
+      // Try to ensure audio plays
+      setTimeout(() => {
+        try {
+          iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+        } catch (e) {
+          console.log('Could not control iframe');
+        }
+        toast.success("🎵 Music should be playing now!");
+      }, 2000);
     }
   };
 
