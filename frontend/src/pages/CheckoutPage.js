@@ -68,7 +68,7 @@ export default function CheckoutPage() {
       </div>
 
       <div style={{background: 'white', borderRadius: '16px', padding: '2rem', boxShadow: '0 4px 12px rgba(0,0,0,0.08)', marginBottom: '2rem'}}>
-        <h2 style={{fontSize: '1.5rem', fontWeight: 600, marginBottom: '1rem'}}>Περίληψη Παραγγελίας</h2>
+        <h2 style={{fontSize: '1.5rem', fontWeight: 600, marginBottom: '1rem'}}>Order Summary</h2>
         {cart.map(item => (
           <div key={item.id} style={{display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem'}} data-testid={`checkout-item-${item.id}`}>
             <span>{item.name} × {item.quantity}</span>
