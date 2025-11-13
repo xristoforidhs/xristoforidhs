@@ -193,7 +193,7 @@ export default function AdminDashboard() {
               </DialogTrigger>
               <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
-                  <DialogTitle>{editingProduct ? 'Επεξεργασία Προϊόντος' : 'Νέο Προϊόν'}</DialogTitle>
+                  <DialogTitle>{editingProduct ? 'Edit Product' : 'New Product'}</DialogTitle>
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
