@@ -81,6 +81,22 @@ export default function ThemeCustomizer() {
     }));
   };
 
+  const handleBackgroundUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setBackgroundFile(file);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setTheme(prev => ({
+          ...prev,
+          background_image: e.target.result,
+          show_background_image: true
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div>
       <Navbar />
