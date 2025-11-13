@@ -188,7 +188,7 @@ export default function AdminDashboard() {
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
                 <Button onClick={() => handleOpenDialog()} data-testid="add-product-btn">
-                  <Plus size={20} /> Προσθήκη Προϊόντος
+                  <Plus size={20} /> Add Product
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
