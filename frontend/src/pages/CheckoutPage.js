@@ -72,7 +72,7 @@ export default function CheckoutPage() {
         {cart.map(item => (
           <div key={item.id} style={{display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem'}} data-testid={`checkout-item-${item.id}`}>
             <span>{item.name} × {item.quantity}</span>
-            <span style={{fontWeight: 600}}>${(item.price * item.quantity).toFixed(2)}</span>
+            <span style={{fontWeight: 600}}>€{(item.price * item.quantity).toFixed(2)}</span>
           </div>
         ))}
         <hr style={{margin: '1rem 0'}} />
