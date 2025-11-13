@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ShoppingCart, User, LogOut, Package } from "lucide-react";
 import { AuthContext } from "@/App";
-import CategoryDropdown from "@/components/CategoryDropdown";
 
 export default function Navbar({ cartCount = 0 }) {
   const { user, logout } = useContext(AuthContext);
@@ -16,7 +15,8 @@ export default function Navbar({ cartCount = 0 }) {
         </Link>
         <div className="navbar-links">
           <Link to="/" className="navbar-link">Home</Link>
-          <CategoryDropdown />
+          <Link to="/category/Electronics" className="navbar-link" style={{background: '#3b82f6', color: 'white', padding: '0.5rem 1rem', borderRadius: '6px', fontWeight: 600}}>Electronics</Link>
+          <Link to="/category/Home%20%26%20Living" className="navbar-link" style={{background: '#10b981', color: 'white', padding: '0.5rem 1rem', borderRadius: '6px', fontWeight: 600}}>Home & Living</Link>
           <Link to="/daily-offers" className="navbar-link" style={{color: '#f59e0b', fontWeight: 600}}>Daily Offers</Link>
           <Link to="/reviews" className="navbar-link">Reviews</Link>
           <Link to="/social" className="navbar-link">Socials</Link>
