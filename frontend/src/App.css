@@ -138,8 +138,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .product-card {
-  background: white;
-  border-radius: 16px;
+  background: var(--card-background) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
