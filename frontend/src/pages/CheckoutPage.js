@@ -13,7 +13,7 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     if (!user) {
-      toast.error("Παρακαλώ συνδεθείτε");
+      toast.error("Please log in");
       navigate("/auth");
     }
     if (cart.length === 0) {
