@@ -115,7 +115,7 @@ export default function CategoryPage() {
                   <span style={{fontSize: '0.875rem', color: '#64748b'}}>({product.review_count})</span>
                 </div>
                 <p className="product-description">{product.description.substring(0, 80)}...</p>
-                <div className="product-price">${product.price}</div>
+                <div className="product-price">€{product.price}</div>
                 <button 
                   onClick={() => addToCart(product)} 
                   className="btn btn-primary"
