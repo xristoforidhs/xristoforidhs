@@ -53,15 +53,9 @@ export default function OrdersPage() {
   return (
     <div>
       <Navbar />
-        </div>
-      </nav>
 
       <div style={{maxWidth: '1200px', margin: '3rem auto', padding: '2rem'}}>
-        <Link to="/" className="navbar-link" style={{marginBottom: '2rem', display: 'inline-flex'}}>
-          <ArrowLeft size={20} /> Επιστροφή
-        </Link>
-
-        <h1 className="section-title" style={{marginTop: '2rem'}}>Οι Παραγγελίες μου</h1>
+        <h1 className="section-title">Οι Παραγγελίες μου</h1>
 
         {orders.length === 0 ? (
           <div style={{textAlign: 'center', padding: '4rem 2rem'}}>
