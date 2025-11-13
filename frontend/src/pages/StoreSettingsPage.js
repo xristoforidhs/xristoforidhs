@@ -318,9 +318,9 @@ export default function StoreSettingsPage() {
                   <div style={{background: '#dcfce7', padding: '1rem', borderRadius: '0.5rem', marginBottom: '1rem'}}>
                     <p style={{fontSize: '0.875rem', color: '#166534'}}>
                       <strong>💰 Potential Earnings:</strong><br/>
-                      • 1,000 visitors/day = $50-200/month<br/>
-                      • 5,000 visitors/day = $250-1,000/month<br/>
-                      • Tech gadgets: ~$1-3 per click
+                      • 1,000 visitors/day = €50-200/month<br/>
+                      • 5,000 visitors/day = €250-1,000/month<br/>
+                      • Tech gadgets: ~€1-3 per click
                     </p>
                   </div>
 
