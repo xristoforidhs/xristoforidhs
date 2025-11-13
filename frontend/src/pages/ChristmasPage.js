@@ -28,28 +28,6 @@ export default function ChristmasPage() {
     }
   };
 
-  const playChristmasMusic = () => {
-    if (!musicPlaying) {
-      // Create YouTube embed for background music
-      const iframe = document.createElement('iframe');
-      iframe.width = '0';
-      iframe.height = '0';
-      iframe.src = 'https://www.youtube.com/embed/VbBb0zLJ5wg?autoplay=1&loop=1&playlist=VbBb0zLJ5wg&controls=0';
-      iframe.style.display = 'none';
-      iframe.allow = 'autoplay; encrypted-media';
-      document.body.appendChild(iframe);
-      setMusicPlaying(true);
-      toast.success("🎵 Christmas music started!");
-    }
-  };
-
-  const stopMusic = () => {
-    const iframes = document.querySelectorAll('iframe[src*="youtube"]');
-    iframes.forEach(iframe => iframe.remove());
-    setMusicPlaying(false);
-    toast.info("🔇 Music stopped");
-  };
-
   const addToCart = (product) => {
     const existing = cart.find(item => item.id === product.id);
     let newCart;
