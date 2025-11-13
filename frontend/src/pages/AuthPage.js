@@ -24,7 +24,7 @@ export default function AuthPage() {
       
       const response = await axios.post(`${API}${endpoint}`, payload);
       login(response.data.token, response.data.user);
-      toast.success(isLogin ? "Επιτυχής σύνδεση!" : "Λογαριασμός δημιουργήθηκε!");
+      toast.success(isLogin ? "Login successful!" : "Account created!");
       navigate("/");
     } catch (error) {
       console.error("Auth error:", error);
