@@ -52,10 +52,10 @@ export default function OrdersPage() {
 
   const getStatusLabel = (status) => {
     const labels = {
-      pending: 'Εκκρεμής',
-      processing: 'Σε Επεξεργασία',
-      completed: 'Ολοκληρωμένη',
-      cancelled: 'Ακυρωμένη'
+      pending: 'Pending',
+      processing: 'Processing',
+      completed: 'Completed',
+      cancelled: 'Cancelled'
     };
     return labels[status] || status;
   };
