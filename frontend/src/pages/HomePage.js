@@ -91,7 +91,7 @@ export default function HomePage() {
                   data-testid={`add-to-cart-${product.id}`}
                 >
                   <ShoppingCart size={18} />
-                  Προσθήκη στο Καλάθι
+                  Add to Cart
                 </button>
               </div>
             </div>
