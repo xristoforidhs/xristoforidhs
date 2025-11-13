@@ -10,7 +10,10 @@ import Footer from "@/components/Footer";
 export default function HomePage() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart") || "[]"));
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const navigate = useNavigate();
+  const productsPerPage = 24;
 
   useEffect(() => {
     fetchProducts();
