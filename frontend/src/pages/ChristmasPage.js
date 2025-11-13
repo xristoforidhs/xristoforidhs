@@ -25,8 +25,8 @@ export default function ChristmasPage() {
 
   const fetchChristmasProducts = async () => {
     try {
-      // Get featured products for Christmas
-      const response = await axios.get(`${API}/products?featured=true&limit=50`);
+      // Get ONLY Christmas category products
+      const response = await axios.get(`${API}/products?category=Christmas&limit=100`);
       setProducts(response.data);
     } catch (error) {
       console.error("Failed to fetch Christmas products", error);
