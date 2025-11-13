@@ -352,7 +352,7 @@ export default function AdminDashboard() {
                     </p>
                   </div>
                   <div>
-                    <p style={{fontSize: '1.5rem', fontWeight: 700, color: '#2563eb'}}>${order.total_amount.toFixed(2)}</p>
+                    <p style={{fontSize: '1.5rem', fontWeight: 700, color: '#2563eb'}}>€{order.total_amount.toFixed(2)}</p>
                   </div>
                 </div>
 
