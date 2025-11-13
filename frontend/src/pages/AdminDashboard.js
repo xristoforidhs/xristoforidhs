@@ -174,6 +174,11 @@ export default function AdminDashboard() {
               🖼️ Image Manager
             </Button>
           </Link>
+          <Link to="/admin/add-products" data-testid="add-products-link">
+            <Button variant="outline">
+              ➕ Add Products
+            </Button>
+          </Link>
         </div>
 
         {/* Products Section */}
