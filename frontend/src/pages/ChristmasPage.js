@@ -10,17 +10,12 @@ import Footer from "@/components/Footer";
 export default function ChristmasPage() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart") || "[]"));
-  const [musicPlaying, setMusicPlaying] = useState(false);
   const navigate = useNavigate();
 
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   useEffect(() => {
     fetchChristmasProducts();
-    // Auto-start Christmas music
-    setTimeout(() => {
-      playChristmasMusic();
-    }, 1000);
   }, []);
 
   const fetchChristmasProducts = async () => {
