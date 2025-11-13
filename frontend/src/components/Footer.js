@@ -203,17 +203,11 @@ export default function Footer() {
             )}
           </div>
 
-          {/* Trustpilot Widget */}
+          {/* Customer Reviews */}
           <div>
-            <h4 style={{fontSize: '1.125rem', fontWeight: 600, marginBottom: '0.75rem'}}>Trusted by Customers</h4>
+            <h4 style={{fontSize: '1.125rem', fontWeight: 600, marginBottom: '0.75rem'}}>Customer Reviews</h4>
             <div 
-              className="trustpilot-widget" 
-              data-locale="en-US" 
-              data-template-id="5419b6a8b0d04a076446a9ad" 
-              data-businessunit-id="YOUR_BUSINESS_UNIT_ID" 
-              data-style-height="24px" 
-              data-style-width="100%" 
-              data-theme="dark"
+              className="reviews-widget" 
               style={{
                 background: 'rgba(255,255,255,0.1)',
                 padding: '1rem',
@@ -226,10 +220,7 @@ export default function Footer() {
                 <span style={{fontWeight: 600}}>Excellent</span>
               </div>
               <p style={{fontSize: '0.875rem', opacity: 0.8, marginTop: '0.5rem'}}>
-                Based on 1,247 reviews
-              </p>
-              <p style={{fontSize: '0.75rem', opacity: 0.7, marginTop: '0.25rem'}}>
-                Trustpilot
+                Based on 1,247+ reviews
               </p>
             </div>
           </div>
