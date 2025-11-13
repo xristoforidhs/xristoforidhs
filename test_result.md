@@ -175,20 +175,17 @@ backend:
         comment: "✅ TESTED: PUT /api/products/{product_id}/calculate-price correctly requires admin auth and calculates prices (Cost $10 -> Selling $22 with 120% markup). POST /api/products/bulk-calculate-prices successfully updated 101 products. Profit markup system working perfectly."
 
 frontend:
-  - task: "Theme Customizer page"
+  - task: "Complete Greek to English translation"
     implemented: true
-    working: true
-    file: "/app/frontend/src/pages/ThemeCustomizer.js"
+    working: "NA"
+    file: "Multiple files"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
-        comment: "ThemeCustomizer.js already fully implemented with color pickers, font selectors, button styles, quick presets, and live preview. Added route /admin/theme to App.js and link in AdminDashboard."
-      - working: true
-        agent: "testing"
-        comment: "✅ TESTED: Theme Customizer fully functional. Found 4 color picker inputs, 11 preset theme buttons, live preview section working. Successfully tested changing primary color to orange, selecting Forest preset theme, and saving theme with success toast notification. All features working perfectly."
+        comment: "Translated all Greek text to English in: AdminDashboard.js (form labels, toasts, status texts), AuthPage.js (success messages), OrdersPage.js (tabs, headings, status labels), PaymentSuccessPage.js (all messages), App.js (loading text). Screenshot verified English navigation visible."
 
   - task: "Reviews Page"
     implemented: true
