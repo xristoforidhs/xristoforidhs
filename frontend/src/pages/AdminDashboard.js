@@ -197,7 +197,7 @@ export default function AdminDashboard() {
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <Label htmlFor="name">Όνομα</Label>
+                    <Label htmlFor="name">Name</Label>
                     <Input
                       id="name"
                       value={formData.name}
@@ -207,7 +207,7 @@ export default function AdminDashboard() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="description">Περιγραφή</Label>
+                    <Label htmlFor="description">Description</Label>
                     <Textarea
                       id="description"
                       value={formData.description}
@@ -219,7 +219,7 @@ export default function AdminDashboard() {
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="price">Τιμή ($)</Label>
+                      <Label htmlFor="price">Price (€)</Label>
                       <Input
                         id="price"
                         type="number"
@@ -231,7 +231,7 @@ export default function AdminDashboard() {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="stock">Απόθεμα</Label>
+                      <Label htmlFor="stock">Stock</Label>
                       <Input
                         id="stock"
                         type="number"
@@ -243,7 +243,7 @@ export default function AdminDashboard() {
                     </div>
                   </div>
                   <div>
-                    <Label htmlFor="category">Κατηγορία</Label>
+                    <Label htmlFor="category">Category</Label>
                     <Input
                       id="category"
                       value={formData.category}
@@ -253,7 +253,7 @@ export default function AdminDashboard() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="image_url">URL Εικόνας</Label>
+                    <Label htmlFor="image_url">Image URL</Label>
                     <Input
                       id="image_url"
                       value={formData.image_url}
@@ -270,10 +270,10 @@ export default function AdminDashboard() {
                       onChange={(e) => setFormData({...formData, featured: e.target.checked})}
                       data-testid="product-featured-checkbox"
                     />
-                    <Label htmlFor="featured">Προβεβλημένο</Label>
+                    <Label htmlFor="featured">Featured</Label>
                   </div>
                   <Button type="submit" className="w-full" data-testid="save-product-btn">
-                    Αποθήκευση
+                    Save
                   </Button>
                 </form>
               </DialogContent>
