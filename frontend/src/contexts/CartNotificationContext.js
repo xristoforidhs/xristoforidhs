@@ -38,10 +38,10 @@ export const CartNotificationProvider = ({ children }) => {
       setNotifications(prev => [notification, ...prev]);
 
       // Show toast for admin (in real app this would be sent via websocket or email)
-      toast.info(`🛒 ${userInfo?.name || 'Guest'} προσθέσε "${productData.name}" στο καλάθι!`, {
+      toast.info(`🛒 ${userInfo?.name || 'Guest'} added "${productData.name}" to cart!`, {
         duration: 5000,
         action: {
-          label: 'Προβολή',
+          label: 'View',
           onClick: () => {
             console.log('Notification details:', notification);
           }
