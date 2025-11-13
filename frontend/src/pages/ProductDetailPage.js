@@ -2,17 +2,19 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { API } from "@/App";
-import { ShoppingCart, ArrowLeft, Package } from "lucide-react";
+import { ShoppingCart, ArrowLeft, Package, Star } from "lucide-react";
 import { toast } from "sonner";
 
 export default function ProductDetailPage() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchProduct();
+    fetchReviews();
   }, [id]);
 
   const fetchProduct = async () => {
@@ -25,6 +27,15 @@ export default function ProductDetailPage() {
       navigate("/");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchReviews = async () => {
+    try {
+      const response = await axios.get(`${API}/products/${id}/reviews`);
+      setReviews(response.data);
+    } catch (error) {
+      console.error("Failed to fetch reviews", error);
     }
   };
 
