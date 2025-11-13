@@ -440,9 +440,10 @@ async def get_products(
     search: Optional[str] = None,
     daily_offer: Optional[bool] = None,
     featured: Optional[bool] = None,
-    limit: int = 100
+    limit: int = 100,
+    skip: int = 0
 ):
-    """Get products with filtering"""
+    """Get products with filtering and pagination"""
     query = {}
     
     if category:
@@ -457,11 +458,36 @@ async def get_products(
     if featured is not None:
         query["featured"] = featured
     
-    products = await db.products.find(query, {"_id": 0}).limit(limit).to_list(limit)
+    products = await db.products.find(query, {"_id": 0}).skip(skip).limit(limit).to_list(limit)
     for product in products:
         if isinstance(product.get('created_at'), str):
             product['created_at'] = datetime.fromisoformat(product['created_at'])
     return products
+
+@api_router.get("/products/count")
+async def get_products_count(
+    category: Optional[str] = None,
+    search: Optional[str] = None,
+    daily_offer: Optional[bool] = None,
+    featured: Optional[bool] = None
+):
+    """Get total products count for pagination"""
+    query = {}
+    
+    if category:
+        query["category"] = category
+    if search:
+        query["$or"] = [
+            {"name": {"$regex": search, "$options": "i"}},
+            {"description": {"$regex": search, "$options": "i"}}
+        ]
+    if daily_offer is not None:
+        query["daily_offer"] = daily_offer
+    if featured is not None:
+        query["featured"] = featured
+    
+    count = await db.products.count_documents(query)
+    return {"count": count}
 
 @api_router.get("/products/{product_id}", response_model=Product)
 async def get_product(product_id: str):
