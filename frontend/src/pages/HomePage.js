@@ -16,8 +16,8 @@ export default function HomePage() {
   const productsPerPage = 24;
 
   useEffect(() => {
-    fetchProducts();
-  }, []);
+    fetchProducts(currentPage);
+  }, [currentPage]);
 
   const fetchProducts = async (page = 1) => {
     try {
