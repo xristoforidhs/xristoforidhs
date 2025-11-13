@@ -98,30 +98,32 @@ function App() {
 
   return (
     <AuthContext.Provider value={{ user, login, logout, token }}>
-      <div className="App">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/product/:id" element={<ProductDetailPage />} />
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="/checkout" element={<CheckoutPage />} />
-            <Route path="/payment-success" element={<PaymentSuccessPage />} />
-            <Route path="/auth" element={<AuthPage />} />
-            <Route path="/orders" element={user ? <OrdersPage /> : <Navigate to="/auth" />} />
-            <Route path="/category/:categoryName" element={<CategoryPage />} />
-            <Route path="/daily-offers" element={<DailyOffersPage />} />
-            <Route path="/social" element={<SocialPage />} />
-            <Route path="/admin" element={user?.role === "admin" ? <AdminDashboard /> : <Navigate to="/" />} />
-            <Route path="/admin/settings" element={user?.role === "admin" ? <StoreSettingsPage /> : <Navigate to="/" />} />
-            <Route path="/admin/customers" element={user?.role === "admin" ? <CustomersPage /> : <Navigate to="/" />} />
-            <Route path="/admin/theme" element={user?.role === "admin" ? <ThemeCustomizer /> : <Navigate to="/" />} />
-            <Route path="/admin/images" element={user?.role === "admin" ? <ImageUploadPage /> : <Navigate to="/" />} />
-            <Route path="/reviews" element={<ReviewsPage />} />
-            <Route path="/christmas" element={<ChristmasPage />} />
-          </Routes>
-        </BrowserRouter>
-        <Toaster position="top-center" richColors />
-      </div>
+      <CartNotificationProvider>
+        <div className="App">
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/product/:id" element={<ProductDetailPage />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
+              <Route path="/payment-success" element={<PaymentSuccessPage />} />
+              <Route path="/auth" element={<AuthPage />} />
+              <Route path="/orders" element={user ? <OrdersPage /> : <Navigate to="/auth" />} />
+              <Route path="/category/:categoryName" element={<CategoryPage />} />
+              <Route path="/daily-offers" element={<DailyOffersPage />} />
+              <Route path="/social" element={<SocialPage />} />
+              <Route path="/admin" element={user?.role === "admin" ? <AdminDashboard /> : <Navigate to="/" />} />
+              <Route path="/admin/settings" element={user?.role === "admin" ? <StoreSettingsPage /> : <Navigate to="/" />} />
+              <Route path="/admin/customers" element={user?.role === "admin" ? <CustomersPage /> : <Navigate to="/" />} />
+              <Route path="/admin/theme" element={user?.role === "admin" ? <ThemeCustomizer /> : <Navigate to="/" />} />
+              <Route path="/admin/images" element={user?.role === "admin" ? <ImageUploadPage /> : <Navigate to="/" />} />
+              <Route path="/reviews" element={<ReviewsPage />} />
+              <Route path="/christmas" element={<ChristmasPage />} />
+            </Routes>
+          </BrowserRouter>
+          <Toaster position="top-center" richColors />
+        </div>
+      </CartNotificationProvider>
     </AuthContext.Provider>
   );
 }
