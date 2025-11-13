@@ -175,9 +175,9 @@ export default function OrdersPage() {
 
         {activeTab === 'pending' && (
           <div>
-            <h2 style={{marginBottom: '1rem'}}>Εκκρεμείς Παραγγελίες</h2>
+            <h2 style={{marginBottom: '1rem'}}>Pending Orders</h2>
             {pendingOrders.length === 0 ? (
-              <p>Δεν υπάρχουν εκκρεμείς παραγγελίες</p>
+              <p>No pending orders</p>
             ) : (
               pendingOrders.map(order => (
                 <div key={order.id} style={{
@@ -189,10 +189,10 @@ export default function OrdersPage() {
                 }}>
                   <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'start'}}>
                     <div>
-                      <h3>Παραγγελία #{order.id}</h3>
-                      <p><strong>Πελάτης:</strong> {order.customer_email}</p>
-                      <p><strong>Συνολικό Κόστος:</strong> €{order.total_amount}</p>
-                      <p><strong>Ημερομηνία:</strong> {new Date(order.created_at).toLocaleDateString()}</p>
+                      <h3>Order #{order.id}</h3>
+                      <p><strong>Customer:</strong> {order.customer_email}</p>
+                      <p><strong>Total Cost:</strong> €{order.total_amount}</p>
+                      <p><strong>Date:</strong> {new Date(order.created_at).toLocaleDateString()}</p>
                     </div>
                     <span style={{
                       background: '#f59e0b',
@@ -201,7 +201,7 @@ export default function OrdersPage() {
                       borderRadius: '4px',
                       fontSize: '0.875rem'
                     }}>
-                      ⏳ Εκκρεμής
+                      ⏳ Pending
                     </span>
                   </div>
                 </div>
