@@ -61,14 +61,14 @@ export default function PaymentSuccessPage() {
         {status === "success" && (
           <>
             <CheckCircle size={64} style={{margin: '0 auto', color: '#22c55e'}} data-testid="success-icon" />
-            <h1 style={{fontSize: '2rem', fontWeight: 700, marginTop: '2rem', color: '#22c55e'}} data-testid="success-message">Η Πληρωμή Ολοκληρώθηκε!</h1>
-            <p style={{color: '#64748b', marginTop: '1rem'}}>Ευχαριστούμε για την παραγγελία σας!</p>
+            <h1 style={{fontSize: '2rem', fontWeight: 700, marginTop: '2rem', color: '#22c55e'}} data-testid="success-message">Payment Completed!</h1>
+            <p style={{color: '#64748b', marginTop: '1rem'}}>Thank you for your order!</p>
             <div style={{display: 'flex', gap: '1rem', marginTop: '2rem', justifyContent: 'center'}}>
               <button onClick={() => navigate("/orders")} className="btn btn-primary" data-testid="view-orders-btn">
-                Προβολή Παραγγελιών
+                View Orders
               </button>
               <button onClick={() => navigate("/")} className="btn btn-secondary" data-testid="continue-shopping-btn">
-                Συνέχεια Αγορών
+                Continue Shopping
               </button>
             </div>
           </>
