@@ -19,7 +19,12 @@ export default function ThemeCustomizer() {
     font_heading: 'Space Grotesk',
     font_body: 'Inter',
     hero_background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    button_style: 'rounded'
+    button_style: 'rounded',
+    layout_width: 'wide',
+    product_card_size: 'medium',
+    header_height: 'normal',
+    background_image: '',
+    show_background_image: false
   });
   const [saving, setSaving] = useState(false);
 
