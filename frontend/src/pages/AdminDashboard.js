@@ -91,7 +91,7 @@ export default function AdminDashboard() {
         toast.success("Product updated");
       } else {
         await axios.post(`${API}/products`, payload);
-        toast.success("Το προϊόν δημιουργήθηκε");
+        toast.success("Product created");
       }
       setIsDialogOpen(false);
       fetchProducts();
