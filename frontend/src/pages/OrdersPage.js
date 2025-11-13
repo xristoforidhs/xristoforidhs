@@ -212,9 +212,9 @@ export default function OrdersPage() {
 
         {activeTab === 'shipped' && (
           <div>
-            <h2 style={{marginBottom: '1rem'}}>Παραγγελίες με Tracking Number</h2>
+            <h2 style={{marginBottom: '1rem'}}>Orders with Tracking Number</h2>
             {shippedOrders.length === 0 ? (
-              <p>Δεν υπάρχουν παραγγελίες με tracking number</p>
+              <p>No orders with tracking number</p>
             ) : (
               shippedOrders.map(order => (
                 <div key={order.id} style={{
@@ -226,11 +226,11 @@ export default function OrdersPage() {
                 }}>
                   <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'start'}}>
                     <div>
-                      <h3>Παραγγελία #{order.id}</h3>
-                      <p><strong>Πελάτης:</strong> {order.customer_email}</p>
+                      <h3>Order #{order.id}</h3>
+                      <p><strong>Customer:</strong> {order.customer_email}</p>
                       <p><strong>Tracking Number:</strong> {order.tracking_number}</p>
-                      <p><strong>Συνολικό Κόστος:</strong> €{order.total_amount}</p>
-                      <p><strong>Ημερομηνία:</strong> {new Date(order.created_at).toLocaleDateString()}</p>
+                      <p><strong>Total Cost:</strong> €{order.total_amount}</p>
+                      <p><strong>Date:</strong> {new Date(order.created_at).toLocaleDateString()}</p>
                     </div>
                     <span style={{
                       background: '#10b981',
@@ -239,7 +239,7 @@ export default function OrdersPage() {
                       borderRadius: '4px',
                       fontSize: '0.875rem'
                     }}>
-                      🚚 Στάλθηκε
+                      🚚 Shipped
                     </span>
                   </div>
                 </div>
