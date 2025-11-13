@@ -28,7 +28,7 @@ export default function AuthPage() {
       navigate("/");
     } catch (error) {
       console.error("Auth error:", error);
-      toast.error(error.response?.data?.detail || "Κάτι πήγε στραβά");
+      toast.error(error.response?.data?.detail || "Something went wrong");
     } finally {
       setLoading(false);
     }
