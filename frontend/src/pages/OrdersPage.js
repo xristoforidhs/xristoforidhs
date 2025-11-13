@@ -89,7 +89,7 @@ export default function OrdersPage() {
               fontWeight: 600
             }}
           >
-            ✅ Ολοκληρωμένες ({completedOrders.length})
+            ✅ Completed ({completedOrders.length})
           </button>
           <button
             onClick={() => setActiveTab('pending')}
