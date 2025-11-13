@@ -92,7 +92,7 @@ export default function CartPage() {
                   </button>
                 </div>
                 <div style={{fontSize: '1.5rem', fontWeight: 700, color: '#2563eb', minWidth: '6rem', textAlign: 'right'}} data-testid={`item-total-${item.id}`}>
-                  ${(item.price * item.quantity).toFixed(2)}
+                  €{(item.price * item.quantity).toFixed(2)}
                 </div>
                 <button 
                   className="btn btn-danger" 
