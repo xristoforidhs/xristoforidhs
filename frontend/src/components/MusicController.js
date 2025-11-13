@@ -42,35 +42,45 @@ export default function MusicController() {
     }
 
     const videoId = extractVideoId(customUrl);
+    const spotifyData = extractSpotifyId(customUrl);
     const isSpotify = isSpotifyUrl(customUrl);
 
-    if (!videoId && !isSpotify) {
+    if (!videoId && !spotifyData) {
       toast.error("Please enter a valid YouTube or Spotify URL");
       return;
     }
 
     let songName = "Custom Song";
-    if (isSpotify) {
-      songName = "Spotify Playlist";
+    let songData = {};
+
+    if (isSpotify && spotifyData) {
+      songName = `Spotify ${spotifyData.type}`;
+      songData = {
+        id: Date.now(),
+        name: songName,
+        url: customUrl,
+        type: 'spotify',
+        spotifyId: spotifyData.id,
+        spotifyType: spotifyData.type
+      };
     } else {
       songName = `YouTube - ${videoId}`;
+      songData = {
+        id: Date.now(),
+        name: songName,
+        url: customUrl,
+        type: 'youtube',
+        videoId: videoId
+      };
     }
 
-    const newSong = {
-      id: Date.now(),
-      name: songName,
-      url: customUrl,
-      type: isSpotify ? 'spotify' : 'youtube',
-      videoId: videoId
-    };
-
-    const updatedPlaylists = [...savedPlaylists, newSong];
+    const updatedPlaylists = [...savedPlaylists, songData];
     setSavedPlaylists(updatedPlaylists);
     localStorage.setItem("musicPlaylists", JSON.stringify(updatedPlaylists));
     
     setCustomUrl("");
     setShowAddForm(false);
-    toast.success("Playlist added!");
+    toast.success("Music added!");
   };
 
   const removePlaylist = (id) => {
