@@ -76,10 +76,10 @@ export default function PaymentSuccessPage() {
 
         {status === "error" && (
           <>
-            <h1 style={{fontSize: '2rem', fontWeight: 700, color: '#ef4444'}}>Σφάλμα</h1>
-            <p style={{color: '#64748b', marginTop: '1rem'}}>Κάτι πήγε στραβά</p>
+            <h1 style={{fontSize: '2rem', fontWeight: 700, color: '#ef4444'}}>Error</h1>
+            <p style={{color: '#64748b', marginTop: '1rem'}}>Something went wrong</p>
             <button onClick={() => navigate("/")} className="btn btn-primary" style={{marginTop: '2rem'}}>
-              Επιστροφή στην Αρχική
+              Return to Home
             </button>
           </>
         )}
