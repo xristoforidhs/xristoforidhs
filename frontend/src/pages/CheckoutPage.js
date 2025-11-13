@@ -77,8 +77,8 @@ export default function CheckoutPage() {
         ))}
         <hr style={{margin: '1rem 0'}} />
         <div style={{display: 'flex', justifyContent: 'space-between', fontSize: '1.5rem', fontWeight: 700}}>
-          <span>Σύνολο</span>
-          <span style={{color: '#2563eb'}} data-testid="checkout-total">${total.toFixed(2)}</span>
+          <span>Total</span>
+          <span style={{color: '#2563eb'}} data-testid="checkout-total">€{total.toFixed(2)}</span>
         </div>
       </div>
 
