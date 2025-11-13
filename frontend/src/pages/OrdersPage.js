@@ -65,7 +65,7 @@ export default function OrdersPage() {
   const shippedOrders = orders.filter(order => order.tracking_number);
 
   if (loading) {
-    return <div style={{minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Φόρτωση...</div>;
+    return <div style={{minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>;
   }
 
   return (
