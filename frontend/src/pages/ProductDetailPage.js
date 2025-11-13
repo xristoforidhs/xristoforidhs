@@ -21,7 +21,7 @@ export default function ProductDetailPage() {
       setProduct(response.data);
     } catch (error) {
       console.error("Failed to fetch product", error);
-      toast.error("Δεν βρέθηκε το προϊόν");
+      toast.error("Product not found");
       navigate("/");
     } finally {
       setLoading(false);
