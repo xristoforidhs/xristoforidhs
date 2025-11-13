@@ -20,7 +20,7 @@ import ThemeCustomizer from "@/pages/ThemeCustomizer";
 import ReviewsPage from "@/pages/ReviewsPage";
 import ImageUploadPage from "@/pages/ImageUploadPage";
 import ChristmasPage from "@/pages/ChristmasPage";
-import { Toaster, toast } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/sonner";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 export const API = `${BACKEND_URL}/api`;
