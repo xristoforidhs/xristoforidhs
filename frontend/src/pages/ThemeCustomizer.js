@@ -347,6 +347,12 @@ export default function ThemeCustomizer() {
                 )}
               </CardContent>
             </Card>
+
+            <Card className="mb-4">
+              <CardHeader>
+                <CardTitle>Button Style</CardTitle>
+              </CardHeader>
+              <CardContent>
                 <div style={{display: 'flex', gap: '1rem'}}>
                   {['rounded', 'square', 'pill'].map(style => (
                     <button
