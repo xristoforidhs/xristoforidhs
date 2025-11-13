@@ -264,11 +264,11 @@ export default function OrdersPage() {
                 }}>
                   <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'start'}}>
                     <div>
-                      <h3>Καλάθι #{cart.id}</h3>
-                      <p><strong>Πελάτης:</strong> {cart.customer_email}</p>
-                      <p><strong>Προϊόντα στο καλάθι:</strong> {cart.items_count}</p>
-                      <p><strong>Αξία καλαθιού:</strong> €{cart.total_value}</p>
-                      <p><strong>Τελευταία ενεργότητα:</strong> {new Date(cart.updated_at).toLocaleDateString()}</p>
+                      <h3>Cart #{cart.id}</h3>
+                      <p><strong>Customer:</strong> {cart.customer_email}</p>
+                      <p><strong>Items in cart:</strong> {cart.items_count}</p>
+                      <p><strong>Cart value:</strong> €{cart.total_value}</p>
+                      <p><strong>Last activity:</strong> {new Date(cart.updated_at).toLocaleDateString()}</p>
                     </div>
                     <span style={{
                       background: '#ef4444',
