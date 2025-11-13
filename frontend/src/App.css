@@ -72,7 +72,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar-link {
-  color: #475569;
+  color: var(--text-color) !important;
   text-decoration: none;
   font-weight: 500;
   font-size: 0.95rem;
@@ -83,7 +83,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar-link:hover {
-  color: #2563eb;
+  color: var(--primary-color) !important;
 }
 
 .cart-badge {
