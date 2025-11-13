@@ -52,7 +52,7 @@ export default function CheckoutPage() {
       window.location.href = checkoutResponse.data.url;
     } catch (error) {
       console.error("Payment error:", error);
-      toast.error("Σφάλμα κατά την πληρωμή");
+      toast.error("Payment error");
       setLoading(false);
     }
   };
