@@ -117,7 +117,7 @@ export default function OrdersPage() {
               fontWeight: 600
             }}
           >
-            🚚 Με Tracking ({shippedOrders.length})
+            🚚 With Tracking ({shippedOrders.length})
           </button>
           <button
             onClick={() => setActiveTab('abandoned')}
