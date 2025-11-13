@@ -97,7 +97,7 @@ export default function AdminDashboard() {
       fetchProducts();
     } catch (error) {
       console.error("Failed to save product", error);
-      toast.error("Αποτυχία αποθήκευσης");
+      toast.error("Failed to save");
     }
   };
 
