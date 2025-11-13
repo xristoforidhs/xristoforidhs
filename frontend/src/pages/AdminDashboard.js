@@ -288,7 +288,7 @@ export default function AdminDashboard() {
                   <h3 className="product-name">{product.name}</h3>
                   <p className="product-description">{product.description.substring(0, 60)}...</p>
                   <div className="product-price">${product.price}</div>
-                  <p style={{fontSize: '0.875rem', color: '#64748b', marginBottom: '1rem'}}>Απόθεμα: {product.stock}</p>
+                  <p style={{fontSize: '0.875rem', color: '#64748b', marginBottom: '1rem'}}>Stock: {product.stock}</p>
                   <div style={{display: 'flex', flexDirection: 'column', gap: '0.5rem'}}>
                     <button 
                       onClick={() => toggleDailyOffer(product.id, !product.daily_offer)}
