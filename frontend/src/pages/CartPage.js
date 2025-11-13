@@ -115,7 +115,7 @@ export default function CartPage() {
                 style={{width: '100%', fontSize: '1.125rem', padding: '1rem'}}
                 data-testid="proceed-to-checkout"
               >
-                Ολοκλήρωση Παραγγελίας
+                Proceed to Checkout
               </button>
             </div>
           </>
