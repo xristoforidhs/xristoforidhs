@@ -327,7 +327,7 @@ agent_communication:
       • Profit markup system: 120% markup configured, successfully updated 101 products
       • Newsletter: Accepts email as query parameter, stores in MongoDB
       • Theme system: Customizable colors/fonts, admin-controlled
-      • All endpoints use correct base URL: https://dship-customizer.preview.emergentagent.com/api
+      • All endpoints use correct base URL: https://estore-dashboard-4.preview.emergentagent.com/api
       
       Backend is production-ready! All new features and existing functionality verified working.
 
