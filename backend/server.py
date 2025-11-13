@@ -527,6 +527,89 @@ async def delete_product(product_id: str, current_user: User = Depends(get_curre
         raise HTTPException(status_code=404, detail="Product not found")
     return {"message": "Product deleted successfully"}
 
+@api_router.post("/admin/seed-database")
+async def seed_database():
+    """Emergency endpoint to seed production database with 3000 products"""
+    import random
+    
+    # Clear existing
+    await db.products.delete_many({})
+    await db.reviews.delete_many({})
+    
+    products = []
+    reviews = []
+    
+    categories = ["Electronics", "Home & Living", "Christmas"]
+    base_names = {
+        "Electronics": ["Wireless Earbuds", "Smart Watch", "Bluetooth Speaker", "USB Charger", "Power Bank", "Webcam", "Keyboard", "Mouse"],
+        "Home & Living": ["Electric Kettle", "Air Purifier", "Storage Container", "Cutting Board", "Dish Rack", "Towel Set", "Shower Curtain"],
+        "Christmas": ["LED Lights", "Christmas Tree", "Ornaments", "Wreath", "Stockings", "Garland", "Tree Skirt"]
+    }
+    
+    images = {
+        "Electronics": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800",
+        "Home & Living": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800",
+        "Christmas": "https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=800"
+    }
+    
+    # Generate 1000 products per category
+    for category in categories:
+        for i in range(1, 1001):
+            name = random.choice(base_names[category])
+            cost = round(random.uniform(10, 50), 2)
+            price = round(cost * 1.25, 2)
+            
+            product_id = f"prod_{category[:3]}_{i}_{random.randint(1000, 9999)}"
+            
+            product = {
+                "id": product_id,
+                "name": f"{name} Premium V{i}",
+                "description": f"High-quality {name.lower()} with premium features. Perfect for daily use and makes excellent gift. Fast shipping available.",
+                "price": price,
+                "cost_price": cost,
+                "image_url": images[category],
+                "category": category,
+                "stock": random.randint(50, 300),
+                "rating": round(random.uniform(4.2, 4.9), 1),
+                "review_count": random.randint(5, 12),
+                "featured": False,
+                "daily_offer": False,
+                "created_at": datetime.now(timezone.utc).isoformat()
+            }
+            products.append(product)
+            
+            # Generate reviews
+            for j in range(random.randint(5, 10)):
+                review = {
+                    "id": f"review_{product_id}_{j}",
+                    "product_id": product_id,
+                    "user_id": f"user_{random.randint(1000, 9999)}",
+                    "user_name": f"Customer {random.randint(100, 999)}",
+                    "rating": random.choices([3, 4, 5], weights=[5, 30, 65])[0],
+                    "comment": random.choice([
+                        "Excellent product! Very satisfied!",
+                        "Great quality! Works perfectly!",
+                        "Love it! Better than expected!",
+                        "Perfect! Just what I needed!",
+                        "Amazing! Highly recommend!"
+                    ]),
+                    "created_at": datetime.now(timezone.utc).isoformat()
+                }
+                reviews.append(review)
+    
+    # Insert all
+    await db.products.insert_many(products)
+    await db.reviews.insert_many(reviews)
+    
+    return {
+        "success": True,
+        "products_created": len(products),
+        "reviews_created": len(reviews),
+        "electronics": 1000,
+        "home_living": 1000,
+        "christmas": 1000
+    }
+
 # ===== ORDER ROUTES =====
 
 @api_router.get("/orders", response_model=List[Order])
