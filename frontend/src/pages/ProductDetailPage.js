@@ -44,7 +44,7 @@ export default function ProductDetailPage() {
   };
 
   if (loading) {
-    return <div style={{minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Φόρτωση...</div>;
+    return <div style={{minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>;
   }
 
   if (!product) return null;
