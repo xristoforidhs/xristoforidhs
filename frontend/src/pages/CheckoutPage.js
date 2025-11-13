@@ -90,9 +90,9 @@ export default function CheckoutPage() {
         data-testid="pay-now-btn"
       >
         {loading ? (
-          <><Loader2 className="animate-spin" size={20} /> Μεταφορά στο Stripe...</>
+          <><Loader2 className="animate-spin" size={20} /> Redirecting to Stripe...</>
         ) : (
-          `Πληρωμή $${total.toFixed(2)}`
+          `Pay €${total.toFixed(2)}`
         )}
       </button>
     </div>
