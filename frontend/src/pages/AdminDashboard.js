@@ -128,7 +128,7 @@ export default function AdminDashboard() {
   const updateOrderStatus = async (orderId, status) => {
     try {
       await axios.put(`${API}/orders/${orderId}/status?status=${status}`);
-      toast.success("Η κατάσταση ενημερώθηκε");
+      toast.success("Status updated");
       fetchOrders();
     } catch (error) {
       console.error("Failed to update order status", error);
