@@ -44,10 +44,6 @@ function App() {
     } else {
       setLoading(false);
     }
-    // Auto-start background music after 3 seconds
-    setTimeout(() => {
-      playBackgroundMusic();
-    }, 3000);
   }, [token]);
 
   const fetchUser = async () => {
