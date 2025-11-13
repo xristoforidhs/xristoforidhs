@@ -24,6 +24,13 @@ export default function MusicController() {
     return match ? match[1] : null;
   };
 
+  const extractSpotifyId = (url) => {
+    // Extract Spotify track/playlist/album ID
+    const spotifyRegex = /spotify\.com\/(track|playlist|album)\/([a-zA-Z0-9]+)/;
+    const match = url.match(spotifyRegex);
+    return match ? { type: match[1], id: match[2] } : null;
+  };
+
   const isSpotifyUrl = (url) => {
     return url.includes('spotify.com');
   };
